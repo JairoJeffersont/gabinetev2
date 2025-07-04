@@ -1,0 +1,22 @@
+{
+    "name": "jscloud/mandato_digital",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jairo Santos",
+            "email": "jairojeffersont@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "ramsey/uuid": "^4.9",
+        "phpoffice/phpspreadsheet": "^4.4"
+    }
+}
