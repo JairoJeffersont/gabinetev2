@@ -15,7 +15,6 @@
             $token = $_GET['token'];
             $senha = $_POST['senha'];
 
-
             $result = $cadastroController->novaSenha($token, $senha);
 
             if ($result['status'] == 'success') {
@@ -31,7 +30,7 @@
 
         <form id="form_login" method="post" enctype="application/x-www-form-urlencoded" class="form-group">
             <div class="form-group">
-                <input type="password" class="form-control" name="senha" id="senha" placeholder="E-mail" value="intell01" required>
+                <input type="password" class="form-control" name="senha" id="senha" placeholder="E-mail" required>
             </div>
             <div class="d-flex justify-content-between align-items-center">
 
