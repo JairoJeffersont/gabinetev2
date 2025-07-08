@@ -63,7 +63,6 @@
                 <input type="text" class="form-control form-control-sm" name="usuario_telefone" placeholder="Seu telefone (com DDD)" data-mask="(00) 00000-0000" maxlength="15" required>
             </div>
 
-
             <div class="col-md-6 col-6">
                 <select class="form-select form-select-sm form_dep" name="gabinete_tipo" required>
                     <option value="" disabled selected>Tipo do Gabinete</option>
@@ -87,9 +86,9 @@
             </div>
 
             <div class="d-flex justify-content-between align-items-center">
-               
+
                 <a type="button" href="?secao=login" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Voltar</a>
-                 <button type="submit" name="btn_salvar" class="btn btn-primary confirm-action"><i class="bi bi-floppy"></i> Salvar</button>
+                <button type="submit" name="btn_salvar" class="btn btn-primary confirm-action"><i class="bi bi-floppy"></i> Salvar</button>
             </div>
         </form>
         <p class="mt-3 copyright">

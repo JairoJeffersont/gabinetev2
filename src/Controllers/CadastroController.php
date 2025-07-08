@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-
-
-
 class CadastroController {
 
     protected $usuarioController;
@@ -60,5 +57,52 @@ class CadastroController {
 
         return $this->usuarioController->inserir($usuario);
         return ['status' => 'success', 'message' => 'Gabinete cadastrado com sucesso.'];
+    }
+
+    public function recuperarSenha($email) {
+        $buscaUsuario = $this->usuarioController->buscar($email, 'email');
+
+        if (empty($buscaUsuario['data'])) {
+            return ['status' => 'not_found', 'message' => 'Email não encontrado.'];
+        }
+
+        $dados = [
+            'token' => uniqid()
+        ];
+
+        $result = $this->usuarioController->atualizar($email, $dados, 'email');
+
+        $token = $dados['token'];
+        include '../src/Helpers/recovery_template.php';
+
+        $email = new \App\Helpers\EmailService();
+        $email->sendMail($buscaUsuario['data']['email'], 'Email de recuperação', $html);
+
+        if ($result['status'] == 'success') {
+            return ['status' => 'success', 'message' => 'Se o e-mail estiver correto, você receberá uma mensagem com instruções de recuperação.'];
+        } else {
+            return $result;
+        }
+    }
+
+    public function novaSenha($token, $senha) {
+        $buscaUsuario = $this->usuarioController->buscar($token, 'token');
+
+        if (empty($buscaUsuario['data'])) {
+            return ['status' => 'not_found', 'message' => 'Token inválido.'];
+        }
+
+        $dados = [
+            'token' => null,
+            'senha' => password_hash($senha, PASSWORD_DEFAULT)
+        ];
+
+        $result = $this->usuarioController->atualizar($token, $dados, 'token');
+
+        if ($result['status'] == 'success') {
+            return ['status' => 'success', 'message' => 'Senha atualizada com sucesso.'];
+        } else {
+            return $result;
+        }
     }
 }
