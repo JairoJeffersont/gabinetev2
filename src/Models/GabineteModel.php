@@ -11,9 +11,9 @@ class GabineteModel extends BaseModel {
     protected array $columns = [
         'id' => ['type' => 'VARCHAR(36)', 'required' => true, 'primary' => true],
         'nome' => ['type' => 'VARCHAR(100)', 'required' => true, 'unique' => true],
-        'estado' => ['type' => 'VARCHAR(2)', 'required' => true, 'foreign' => 'estado.id'],
-        'cidade' => ['type' => 'VARCHAR(100)', 'required' => true, 'foreign' => 'cidade.id'],
-        'partido' => ['type' => 'VARCHAR(100)', 'required' => true],
+        'estado' => ['type' => 'VARCHAR(2)', 'required' => true],
+        'cidade' => ['type' => 'VARCHAR(100)', 'required' => false, 'default' => null],
+        'partido' => ['type' => 'VARCHAR(100)', 'required' => false, 'default' => null],
         'tipo' => ['type' => 'VARCHAR(36)', 'required' => true, 'foreign' => 'gabinete_tipo.id'],
         'ativo' => ['type' => 'BOOLEAN', 'required' => true, 'default' => true],
     ];
