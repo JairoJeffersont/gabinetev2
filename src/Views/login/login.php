@@ -37,7 +37,7 @@
                 <input type="email" class="form-control" name="email" id="email" placeholder="E-mail" value="jairojeffersont@gmail.com" required>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="intell01" required>
+                <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="intell3103" required>
             </div>
             <div class="d-flex justify-content-between align-items-center">
                 <button type="submit" name="btn_logar" class="btn"><i class="bi bi-door-open"></i> Entrar</button>
