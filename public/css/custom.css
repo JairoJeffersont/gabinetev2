@@ -16,10 +16,26 @@ body {
     font-weight: 600;
 }
 
+.custom-card-body{
+    font-size: 0.8em;
+}
 
 .custom-card-header {
     font-weight: 600;
     background-image: url('../img/blue-bg.jpeg');
     background-size: cover;
     color: white;
+    font-size: 0.8em;
+}
+
+.form_custom {
+    font-size: 1em;
+}
+
+.form_custom input,
+.form_custom select,
+.form_custom textarea,
+.form_custom button,
+.form_custom a {
+    font-size: inherit;
 }
