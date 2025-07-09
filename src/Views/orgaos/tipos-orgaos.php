@@ -47,7 +47,7 @@ $usuarioController = new \App\Controllers\UsuarioController()
                         } else if ($result['status'] == 'duplicated') {
                             echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
                         } else if ($result['status'] == 'server_error') {
-                            echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
+                            echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . ' - ' . $result['error_id'] . '</div>';
                         }
                     }
 
@@ -86,7 +86,7 @@ $usuarioController = new \App\Controllers\UsuarioController()
                                               </tr>';
                                     }
                                 } else if ($buscaTipos['status'] == 'empty' || $buscaTipos['status'] == 'server_error') {
-                                    echo '<tr><td colspan="2">' . $buscaTipos['message'] . '</td></tr>';
+                                    echo '<tr><td colspan="2">' . $buscaTipos['message'] . ' - ' . $buscaTipos['error_id'] . '</td></tr>';
                                 }
 
                                 ?>
