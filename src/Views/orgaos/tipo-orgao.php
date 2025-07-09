@@ -64,14 +64,28 @@ if ($buscaTipo['status'] != 'success') {
                         }
                     }
 
+                    if ($_SESSION['tipo'] != '1' && $_SESSION['tipo'] != '3') {
+                        echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">Você não tem autorização para inserir ou editar tipos.</div>';
+                    }
+
+
+
                     ?>
                     <form class="row g-2 form_custom" id="form_novo" method="POST">
                         <div class="col-md-2 col-12">
                             <input type="text" class="form-control form-control-sm" name="orgao_tipo_nome" placeholder="Nome do Tipo" value="<?= $buscaTipo['data']['nome'] ?>" required>
                         </div>
                         <div class="col-md-3 col-12">
-                            <button type="submit" class="btn btn-success btn-sm confirm-action" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Atualizar</button>
-                            <button type="submit" class="btn btn-danger btn-sm confirm-action" name="btn_apagar"><i class="bi bi-trash"></i> Apagar</button>
+                            <?php
+                            if ($_SESSION['tipo'] == '1' || $_SESSION['tipo'] == '3') {
+                                echo '<button type="submit" class="btn btn-success btn-sm confirm-action" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Atualizar</button>&nbsp;';
+                                echo '<button type="submit" class="btn btn-danger btn-sm confirm-action" name="btn_apagar"><i class="bi bi-trash"></i> Apagar</button>';
+                            } else {
+                                echo '<button type="submit" class="btn btn-success btn-sm confirm-action" disabled name="btn_salvar"><i class="bi bi-floppy-fill"></i> Atualizar</button>&nbsp;';
+                                echo '<button type="submit" class="btn btn-danger btn-sm confirm-action" disabled name="btn_apagar"><i class="bi bi-trash"></i> Apagar</button>';
+                            }
+                            ?>
+
                         </div>
                     </form>
                 </div>
