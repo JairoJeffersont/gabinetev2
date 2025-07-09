@@ -14,7 +14,6 @@ if ($buscaTipo['status'] != 'success') {
     header('Location: ?secao=tipos-orgaos');
 }
 
-
 ?>
 
 <div class="d-flex" id="wrapper">
@@ -77,7 +76,6 @@ if ($buscaTipo['status'] != 'success') {
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

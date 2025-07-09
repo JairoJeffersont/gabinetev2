@@ -11,6 +11,4 @@ class OrgaoTipoController extends BaseController {
         parent::__construct(new OrgaoTipoModel());
     }
 
-    
-
 }

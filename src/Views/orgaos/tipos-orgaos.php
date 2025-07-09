@@ -54,9 +54,9 @@ $usuarioController = new \App\Controllers\UsuarioController()
                     ?>
                     <form class="row g-2 form_custom" id="form_novo" method="POST">
                         <div class="col-md-2 col-12">
-                            <input type="text" class="form-control form-control-sm" name="orgao_tipo_nome" placeholder="Nome do Tipo" required>
+                            <input type="text" class="form-control form-control-sm" name="orgao_tipo_nome" placeholder="Nome do Tipo">
                         </div>
-                        <div class="col-md-1 col-12">
+                        <div class="col-md-5 col-12">
                             <button type="submit" class="btn btn-success btn-sm confirm-action" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Salvar</button>
                         </div>
                     </form>
