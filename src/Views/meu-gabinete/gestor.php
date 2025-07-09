@@ -22,7 +22,7 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
 ?>
 <div class="card mb-2 ">
     <div class="card-body custom-card-body p-1">
-        <a class="btn btn-primary btn-sm custom-nav barra_navegacao" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
+        <a class="btn btn-primary btn-sm" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
     </div>
 </div>
 

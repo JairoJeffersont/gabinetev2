@@ -11,6 +11,7 @@ $rotas = [
     'meu-gabinete' => '../src/Views/meu-gabinete/index.php',
     'cadastro' => '../src/Views/login/cadastro.php',
     'home' => '../src/Views/home/home.php',
+    'tipos-orgaos' => '../src/Views/orgaos/tipos-orgaos.php',
 ];
 
 if (array_key_exists($pagina, $rotas)) {

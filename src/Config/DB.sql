@@ -77,6 +77,9 @@ CREATE TABLE
         FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+INSERT INTO orgao_tipo (id, nome, gabinete, criado_por) VALUES
+    ('1', 'Sem tipo definido', '1', '1');
+
 CREATE TABLE
     orgao (
         id VARCHAR(36) NOT NULL PRIMARY KEY,
