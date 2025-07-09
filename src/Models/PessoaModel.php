@@ -31,7 +31,7 @@ class PessoaModel extends BaseModel {
         'gabinete' => ['type' => 'VARCHAR(36)', 'required' => true, 'foreign' => 'gabinete.id'],
         'foto' => ['type' => 'TEXT', 'required' => false, 'default' => null],
         'criado_por' => ['type' => 'VARCHAR(36)', 'required' => true, 'foreign' => 'usuario.id'],
-        'criado_em' => ['type' => 'TIMESTAMP', 'required' => false, 'default' => 'CURRENT_TIMESTAMP'],
+        'criado_em' => ['type' => 'TIMESTAMP', 'required' => true, 'default' => 'CURRENT_TIMESTAMP'],
         'atualizada_em' => ['type' => 'TIMESTAMP', 'required' => true, 'default' => 'CURRENT_TIMESTAMP', 'on_update' => 'CURRENT_TIMESTAMP'],
     ];
 

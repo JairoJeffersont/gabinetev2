@@ -16,12 +16,12 @@ class UsuarioModel extends BaseModel {
         'token' => ['type' => 'VARCHAR(36)', 'required' => false, 'default' => null],
         'telefone' => ['type' => 'VARCHAR(20)', 'required' => true],
         'foto' => ['type' => 'TEXT', 'required' => false, 'default' => null],
-        'aniversario' => ['type' => 'VARCHAR(5)', 'required' => true],
+        'aniversario' => ['type' => 'VARCHAR(5)', 'required' => false, 'default' => null],
         'ativo' => ['type' => 'BOOLEAN', 'required' => true, 'default' => true],
         'gabinete' => ['type' => 'VARCHAR(36)', 'required' => true, 'foreign' => 'gabinete.id'],
         'tipo_id' => ['type' => 'VARCHAR(36)', 'required' => true, 'foreign' => 'usuario_tipo.id'],
         'criado_em' => ['type' => 'TIMESTAMP', 'required' => true, 'default' => 'CURRENT_TIMESTAMP'],
-        'atualizado_em' => ['type' => 'TIMESTAMP', 'required' => true, 'default' => 'CURRENT_TIMESTAMP', 'on_update' => 'CURRENT_TIMESTAMP'],
+        'atualizado_em' => ['type' => 'TIMESTAMP', 'required' => true, 'default' => 'CURRENT_TIMESTAMP', 'on_update' => 'CURRENT_TIMESTAMP' ],
     ];
 
     public function getColumns(): array {

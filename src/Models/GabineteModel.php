@@ -16,6 +16,8 @@ class GabineteModel extends BaseModel {
         'partido' => ['type' => 'VARCHAR(100)', 'required' => false, 'default' => null],
         'tipo' => ['type' => 'VARCHAR(36)', 'required' => true, 'foreign' => 'gabinete_tipo.id'],
         'ativo' => ['type' => 'BOOLEAN', 'required' => true, 'default' => true],
+        'criado_em' => ['type' => 'TIMESTAMP', 'required' => true, 'default' => 'CURRENT_TIMESTAMP'],
+        'atualizado_em' => ['type' => 'TIMESTAMP', 'required' => true, 'default' => 'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'],
     ];
 
     public function getColumns(): array {
