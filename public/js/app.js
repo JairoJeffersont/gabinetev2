@@ -130,3 +130,48 @@ $(function () {
     });
 
 });
+
+
+function copyToClipboard() {
+    // Pega o link do elemento com o id 'link-cadastro'
+    var link = document.getElementById('link-cadastro').innerText;
+
+    // Cria um elemento de input para copiar o texto para a Ã¡rea de transferÃªncia
+    var tempInput = document.createElement('input');
+    tempInput.value = link;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+
+    // Opcional: pode adicionar um feedback visual aqui, como um alert ou tooltip
+    alert('Link copiado!');
+}
+
+
+$(document).ready(function () {
+
+    const $select = $('#partidos');
+    const dataSelected = $select.data('selected'); // Lê o valor de data-selected
+
+    $.ajax({
+        url: "https://dadosabertos.camara.leg.br/api/v2/partidos?itens=100&ordenarPor=sigla",
+        method: "GET",
+        dataType: "json",
+        success: function (resposta) {
+            const partidos = resposta.dados;
+
+            // Limpa opções anteriores (exceto a primeira)
+            $select.find('option:not(:first)').remove();
+
+            // Adiciona os partidos ao select
+            partidos.forEach(function (partido) {
+                const selected = dataSelected == partido.sigla ? 'selected' : '';
+                $select.append(`<option value="${partido.sigla}" ${selected}>${partido.sigla}</option>`);
+            });
+        },
+        error: function () {
+            alert("Erro ao carregar os partidos.");
+        }
+    });
+});

@@ -5,13 +5,12 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO gabinete_tipo (id, nome) VALUES
-    ('1', 'Gestor'),
-    ('2', 'Deputado Federal'),
-    ('3', 'Senador'),
-    ('4', 'Deputado Estadual'),
-    ('5', 'Vereador'),
-    ('6', 'Prefeito'),
-    ('7', 'Governador');
+    ('1', 'Deputado Federal'),
+    ('2', 'Senador'),
+    ('3', 'Deputado Estadual'),
+    ('4', 'Vereador'),
+    ('5', 'Prefeito'),
+    ('6', 'Governador');
 
 CREATE TABLE
     gabinete (
@@ -41,7 +40,8 @@ INSERT INTO usuario_tipo (id, nome) VALUES
     ('2', 'Comunicação'),
     ('3', 'Secretaria'),
     ('4', 'Legislativo'),
-    ('5', 'Orçamento');
+    ('5', 'Orçamento'),
+    ('6', 'Padrão');
 
 CREATE TABLE
     usuario (

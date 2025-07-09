@@ -48,14 +48,14 @@ class CadastroController {
         $usuario = [
             'nome' => $dados['usuario_nome'],
             'email' => $dados['usuario_email'],
-            'senha' => password_hash($dados['usuario_senha'], PASSWORD_DEFAULT),
+            'senha' => $dados['usuario_senha'],
             'telefone' => $dados['usuario_telefone'],
             'ativo' => 1,
             'gabinete' => $buscaGabinete['data'][0]['id'],
             'tipo_id' => 1,
         ];
 
-        return $this->usuarioController->inserir($usuario);
+        return $this->usuarioController->novoUsuario($usuario);
         return ['status' => 'success', 'message' => 'Gabinete cadastrado com sucesso.'];
     }
 

@@ -7,6 +7,7 @@ $rotas = [
     'sair' => '../src/Views/includes/sair.php',
     'recuperar-senha' => '../src/Views/login/recuperar-senha.php',
     'nova-senha' => '../src/Views/login/nova-senha.php',
+    'novo-usuario' => '../src/Views/login/novo-usuario.php',
     'meu-gabinete' => '../src/Views/meu-gabinete/index.php',
     'cadastro' => '../src/Views/login/cadastro.php',
     'home' => '../src/Views/home/home.php',
