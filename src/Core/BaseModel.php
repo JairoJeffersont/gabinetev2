@@ -88,7 +88,7 @@ abstract class BaseModel {
      * 
      * @return bool Retorna true se a atualização foi bem-sucedida, false caso contrário ou se não houver dados para atualizar.
      */
-    public function atualizar(string $colunaCondicao = 'id', $valorCondicao, array $data): bool {
+    public function atualizar(string $colunaCondicao, $valorCondicao, array $data): bool {
 
         $filteredData = array_intersect_key($data, array_flip(array_keys($this->columns)));
 
@@ -123,7 +123,7 @@ abstract class BaseModel {
      * 
      * @return array|null Retorna o registro encontrado como array associativo, ou null se não encontrar.
      */
-    public function buscar(string $colunaCondicao = 'id', $valorCondicao = null): ?array {
+    public function buscar(string $colunaCondicao, $valorCondicao = null): ?array {
 
         if ($valorCondicao === null) {
             return null;
@@ -147,24 +147,52 @@ abstract class BaseModel {
      * @param int $pagina Número da página (default 1).
      * @param array $condicoes Array associativo de condições no formato coluna => valor para filtro (default vazio).
      * 
+     * $condicoes = [
+     *'gabinete' => [
+     *   $_SESSION['gabinete'],
+     *   1
+     *]
+];
      * @return array Retorna um array de registros, cada um como array associativo.
      */
-    public function listas(string $ordenarPor = 'id', string $ordem = 'ASC', int $itens = 10, int $pagina = 1, array $condicoes = []): array {
+    public function listas(
+        string $ordenarPor = 'id',
+        string $ordem = 'ASC',
+        int $itens = 10,
+        int $pagina = 1,
+        array $condicoes = [],
+        string $operador = 'OR' // novo parâmetro
+    ): array {
         $offset = ($pagina - 1) * $itens;
 
         $whereParts = [];
-        foreach ($condicoes as $coluna => $valor) {
-            $whereParts[] = "$coluna = :$coluna";
+        $parametros = [];
+        $contador = 0;
+
+        foreach ($condicoes as $coluna => $valores) {
+            if (!is_array($valores)) {
+                $valores = [$valores];
+            }
+            foreach ($valores as $valor) {
+                $param = "{$coluna}_{$contador}";
+                $whereParts[] = "$coluna = :$param";
+                $parametros[$param] = $valor;
+                $contador++;
+            }
         }
-        $whereSql = !empty($whereParts) ? ' WHERE ' . implode(' AND ', $whereParts) : '';
+
+        // garante que o operador seja seguro
+        $operador = strtoupper($operador) === 'OR' ? 'OR' : 'AND';
+
+        $whereSql = !empty($whereParts) ? ' WHERE ' . implode(" $operador ", $whereParts) : '';
 
         $ordem = strtoupper($ordem) === 'DESC' ? 'DESC' : 'ASC';
         $sql = "SELECT * FROM {$this->table}{$whereSql} ORDER BY $ordenarPor $ordem LIMIT :itens OFFSET :offset";
 
         $stmt = $this->conn->prepare($sql);
 
-        foreach ($condicoes as $coluna => $valor) {
-            $stmt->bindValue(":$coluna", $valor);
+        foreach ($parametros as $param => $valor) {
+            $stmt->bindValue(":$param", $valor);
         }
 
         $stmt->bindValue(':itens', $itens, PDO::PARAM_INT);
@@ -173,11 +201,12 @@ abstract class BaseModel {
 
         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        // COUNT
         $sqlCount = "SELECT COUNT(*) FROM {$this->table}{$whereSql}";
         $stmtCount = $this->conn->prepare($sqlCount);
 
-        foreach ($condicoes as $coluna => $valor) {
-            $stmtCount->bindValue(":$coluna", $valor);
+        foreach ($parametros as $param => $valor) {
+            $stmtCount->bindValue(":$param", $valor);
         }
 
         $stmtCount->execute();
@@ -190,6 +219,8 @@ abstract class BaseModel {
     }
 
 
+
+
     /**
      * Apaga um registro da tabela baseado em uma condição.
      * 
@@ -198,7 +229,7 @@ abstract class BaseModel {
      * 
      * @return bool Retorna true se a exclusão foi bem-sucedida, false caso contrário.
      */
-    public function apagar(string $colunaCondicao = 'id', $valorCondicao): bool {
+    public function apagar(string $colunaCondicao, $valorCondicao): bool {
         $sql = "DELETE FROM {$this->table} WHERE $colunaCondicao = :condicao";
 
         $stmt = $this->conn->prepare($sql);

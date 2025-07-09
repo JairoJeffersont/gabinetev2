@@ -83,8 +83,8 @@ INSERT INTO orgao_tipo (id, nome, gabinete, criado_por) VALUES
 CREATE TABLE
     orgao (
         id VARCHAR(36) NOT NULL PRIMARY KEY,
-        nome TEXT NOT NULL,
-        email VARCHAR(255) NOT NULL UNIQUE,
+        nome VARCHAR(255) NOT NULL UNIQUE,
+        email VARCHAR(255) DEFAULT NULL,
         telefone VARCHAR(255) DEFAULT NULL,
         endereco TEXT,
         municipio VARCHAR(255) NOT NULL,

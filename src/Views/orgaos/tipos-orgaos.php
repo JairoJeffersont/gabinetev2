@@ -96,7 +96,9 @@ $usuarioController = new \App\Controllers\UsuarioController()
 
                                               </tr>';
                                     }
-                                } else if ($buscaTipos['status'] == 'empty' || $buscaTipos['status'] == 'server_error') {
+                                } else if ($buscaTipos['status'] == 'empty') {
+                                    echo '<tr><td colspan="2">' . $buscaTipos['message'] . '</td></tr>';
+                                } else if ($buscaTipos['status'] == 'server_error') {
                                     echo '<tr><td colspan="2">' . $buscaTipos['message'] . ' - ' . $buscaTipos['error_id'] . '</td></tr>';
                                 }
 

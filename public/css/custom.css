@@ -41,9 +41,12 @@ body {
 .form_custom select,
 .form_custom textarea,
 .form_custom button,
-.form_custom a {
-    font-size: inherit;
+.form_custom a,
+.form_custom .input-group>.form-select {
+    font-size: inherit !important;
 }
+
+
 
 .dropdown-item-custom {
     font-size: 0.85em;

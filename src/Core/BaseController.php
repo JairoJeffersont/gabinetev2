@@ -125,9 +125,9 @@ abstract class BaseController {
      * @param array $condicoes Filtros de busca (coluna => valor).
      * @return array Retorna os dados, total de páginas e status.
      */
-    public function listar(string $ordenarPor = 'id', string $ordem = 'ASC', int $itens = 10, int $pagina = 1, array $condicoes = []): array {
+    public function listar(string $ordenarPor = 'id', string $ordem = 'ASC', int $itens = 10, int $pagina = 1, array $condicoes = [], $operador = 'OR'): array {
         try {
-            $resultado = $this->model->listas($ordenarPor, $ordem, $itens, $pagina, $condicoes);
+            $resultado = $this->model->listas($ordenarPor, $ordem, $itens, $pagina, $condicoes, $operador);
 
             if(empty($resultado['data'])){
                 return ['status' => 'empty', 'message' => 'Nenhum registro encontrado'];

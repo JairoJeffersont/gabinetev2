@@ -13,6 +13,7 @@ $rotas = [
     'home' => '../src/Views/home/home.php',
     'tipos-orgaos' => '../src/Views/orgaos/tipos-orgaos.php',
     'tipo-orgao' => '../src/Views/orgaos/tipo-orgao.php',
+    'orgaos' => '../src/Views/orgaos/orgaos.php',
 ];
 
 if (array_key_exists($pagina, $rotas)) {
