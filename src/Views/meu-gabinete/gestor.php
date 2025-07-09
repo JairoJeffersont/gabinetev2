@@ -90,6 +90,7 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
 <div class="card mb-2">
     <div class="card-body custom-card-body p-2">
         <p class="card-text mb-2"><b>Meus dados</b></p>
+        
         <?php
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_atualizar_usuario'])) {
 
@@ -97,21 +98,22 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
                 'nome' => $_POST['usuario_nome'],
                 'email' => $_POST['usuario_email'],
                 'telefone' => $_POST['usuario_telefone'],
-                'aniversario' => $_POST['usuario_aniversario']
-
+                'aniversario' => $_POST['usuario_aniversario'],
+                'foto' => $_FILES['usuario_foto']
             ];
 
-            $resultUsuarios = $usuarioController->atualizar($usuarioSessao, $dadosUsuario, 'id');
+            $resultUsuarios = $usuarioController->atualizarUsuario($usuarioSessao, $dadosUsuario, 'id');
 
             if ($resultUsuarios['status'] == 'success') {
                 $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
                 echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="3">Usuário atualizado com sucesso!</div>';
             }
+
         }
         ?>
 
         <form class="row g-2 form_custom" id="form_novo" method="POST" enctype="multipart/form-data">
-            <div class="col-md-3 col-12">
+            <div class="col-md-2 col-12">
                 <input type="text" class="form-control form-control-sm" name="usuario_nome" placeholder="Nome" value="<?= $buscaUsuario['data']['nome'] ?>" required>
             </div>
             <div class="col-md-2 col-12">
@@ -120,10 +122,13 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
             <div class="col-md-2 col-6">
                 <input type="text" class="form-control form-control-sm" name="usuario_telefone" placeholder="Celular (com DDD)" data-mask="(00) 00000-0000" value="<?= $buscaUsuario['data']['telefone'] ?>" maxlength="15">
             </div>
-            <div class="col-md-2 col-6">
+            <div class="col-md-1 col-6">
                 <input type="text" class="form-control form-control-sm" name="usuario_aniversario" data-mask="00/00" placeholder="Aniversário (dd/mm)" value="<?= $buscaUsuario['data']['aniversario'] ?>">
             </div>
-            <div class="col-md-3 col-12">
+            <div class="col-md-2 col-6">
+                <input type="file" class="form-control form-control-sm" name="usuario_foto">
+            </div>
+            <div class="col-md-1 col-12">
                 <button type="submit" class="btn btn-primary btn-sm confirm-action" name="btn_atualizar_usuario"><i class="bi bi-floppy-fill"></i> Atualizar</button>
             </div>
         </form>
