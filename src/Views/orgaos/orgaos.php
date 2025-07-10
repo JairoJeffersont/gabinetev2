@@ -8,6 +8,7 @@ $tipoOrgaoController = new \App\Controllers\OrgaoTipoController();
 $usuarioController = new \App\Controllers\UsuarioController();
 $orgaoController = new \App\Controllers\OrgaoController();
 $gabineteController = new \App\Controllers\GabineteController();
+$exportHelper = new \App\Helpers\FileExportHelper();
 
 $estadogabinete = $gabineteController->buscar($_SESSION['gabinete'])['data']['estado'];
 
@@ -84,9 +85,8 @@ if ($termo !== '') {
                             echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . ' - ' . $result['error_id'] . '</div>';
                         }
                     }
-
+                    
                     ?>
-
 
                     <form class="row g-2 form_custom " id="form_novo" method="POST" enctype="application/x-www-form-urlencoded">
                         <div class="col-md-5 col-12">
@@ -103,7 +103,7 @@ if ($termo !== '') {
                         </div>
 
                         <div class="col-md-2 col-12">
-                            <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP (somente números)" data-mask="00000-000" maxlength="8">
+                            <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP (somente números)" data-mask="00000-000" maxlength="9">
                         </div>
                         <div class="col-md-2 col-6">
                             <select class="form-select form-select-sm" id="estado" name="estado" required>
@@ -131,7 +131,7 @@ if ($termo !== '') {
                                     }
                                     ?>
                                 </select>
-                                <a href="?secao=tipos-orgaos" type="button" class="btn btn-secondary confirm-action" title="Adicionar novo tipo" onclick="abrirModalNovoTipo()">
+                                <a href="?secao=tipos-orgaos" type="button" class="btn btn-secondary confirm-action" title="Adicionar novo tipo">
                                     <i class="bi bi-plus"></i> novo tipo
                                 </a>
                             </div>
@@ -149,8 +149,9 @@ if ($termo !== '') {
                         <div class="col-md-12 col-12">
                             <textarea class="form-control form-control-sm" name="informacoes" rows="5" placeholder="Informações importantes desse órgão"></textarea>
                         </div>
-                        <div class="col-md-4 col-6">
+                        <div class="col-md-4 col-12">
                             <button type="submit" class="btn btn-success confirm-action  btn-sm" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Salvar</button>
+                            <a href="?secao=exportar" type="submit" class="btn btn-primary confirm-action  btn-sm"><i class="bi bi-download"></i> Exportar dados</a>
                         </div>
                     </form>
                 </div>
@@ -223,7 +224,7 @@ if ($termo !== '') {
                 <div class="card-body custom-card-body p-1">
                     <div class="table-responsive">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped table-bordered mb-2">
+                            <table class="table table-hover table-striped table-bordered mb-0">
                                 <thead>
                                     <tr>
                                         <th scope="col">Nome</th>
@@ -262,7 +263,7 @@ if ($termo !== '') {
                                 </tbody>
                             </table>
                             <?php
-                            $totalPaginas = $buscaOrgaos['total_paginas'];
+                            $totalPaginas = isset($buscaOrgaos['total_paginas']) ? $buscaOrgaos['total_paginas'] : 0;
 
                             if ($totalPaginas > 1):
 
@@ -276,7 +277,7 @@ if ($termo !== '') {
                                     $inicio = max(1, $fim - $maxLinks + 1);
                                 }
                             ?>
-                                <ul class="pagination custom-pagination mb-0">
+                                <ul class="pagination custom-pagination mt-2 mb-0">
                                     <!-- Primeiro -->
                                     <li class="page-item <?= $pagina == 1 ? 'disabled' : '' ?>">
                                         <a class="page-link" href="?secao=orgaos&ordenarPor=<?= $ordenarPor ?>&ordem=<?= $ordem ?>&itens=<?= $itens ?>&tipo=<?= $tipo ?>&estado=<?= $estado ?>&termo=<?= urlencode($termo) ?>&pagina=1">Primeiro</a>

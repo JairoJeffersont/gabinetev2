@@ -2,7 +2,7 @@ $(function () {
 
     // Quando clicar em qualquer elemento com a classe .link_loading
     $('.link_loading').on('click', function (e) {
-        e.preventDefault(); // Evita o comportamento padrão do link (navegar para outra página)
+        //e.preventDefault(); // Evita o comportamento padrão do link (navegar para outra página)
 
         // Mostra o modal de carregamento (Bootstrap)
         const modal = new bootstrap.Modal($('#modalLoading')[0]);
@@ -150,9 +150,11 @@ function copyToClipboard() {
 
 
 $(document).ready(function () {
-
     const $select = $('#partidos');
     const dataSelected = $select.data('selected'); // Lê o valor de data-selected
+
+    // Mostra a opção de carregamento
+    $select.html('<option disabled selected>Carregando partidos...</option>');
 
     $.ajax({
         url: "https://dadosabertos.camara.leg.br/api/v2/partidos?itens=100&ordenarPor=sigla",
@@ -161,8 +163,11 @@ $(document).ready(function () {
         success: function (resposta) {
             const partidos = resposta.dados;
 
-            // Limpa opções anteriores (exceto a primeira)
-            $select.find('option:not(:first)').remove();
+            // Limpa todas as opções anteriores
+            $select.empty();
+
+            // Adiciona uma primeira opção padrão
+            $select.append('<option value="">Selecione um partido</option>');
 
             // Adiciona os partidos ao select
             partidos.forEach(function (partido) {
@@ -171,7 +176,9 @@ $(document).ready(function () {
             });
         },
         error: function () {
+            $select.html('<option disabled selected>Erro ao carregar os partidos</option>');
             alert("Erro ao carregar os partidos.");
         }
     });
 });
+

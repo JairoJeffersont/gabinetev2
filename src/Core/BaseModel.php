@@ -139,22 +139,26 @@ abstract class BaseModel {
     }
 
     /**
-     * Lista múltiplos registros da tabela com paginação e filtros opcionais.
+     * Lista múltiplos registros da tabela com paginação, ordenação e filtros opcionais.
      * 
-     * @param string $ordenarPor Coluna para ordenar os resultados (default 'id').
-     * @param string $ordem Ordem da ordenação, 'ASC' ou 'DESC' (default 'ASC').
-     * @param int $itens Quantidade de itens por página (default 10).
-     * @param int $pagina Número da página (default 1).
-     * @param array $condicoes Array associativo de condições no formato coluna => valor para filtro (default vazio).
+     * @param string $ordenarPor Coluna utilizada para ordenar os resultados (padrão: 'id').
+     * @param string $ordem Direção da ordenação: 'ASC' (crescente) ou 'DESC' (decrescente). Padrão: 'ASC'.
+     * @param int $itens Quantidade de itens por página. Padrão: 10.
+     * @param int $pagina Número da página a ser exibida. Padrão: 1.
+     * @param array $condicoes Filtros aplicados na cláusula WHERE. Deve ser um array associativo no formato:
+     *   [
+     *     'coluna' => valor, // igualdade simples
+     *     'coluna' => ['=' => valor], // condição com operador
+     *     'coluna' => ['LIKE' => '%valor%'], // exemplo com operador LIKE
+     *     'coluna' => ['>' => 10, '<' => 20] // múltiplas condições para a mesma coluna
+     *   ]
+     * @param string $operador Operador lógico entre condições: 'AND' ou 'OR'. Padrão: 'OR'.
      * 
-     * $condicoes = [
-     *'gabinete' => [
-     *   $_SESSION['gabinete'],
-     *   1
-     *]
-];
-     * @return array Retorna um array de registros, cada um como array associativo.
+     * @return array Retorna um array contendo:
+     *   - 'data': array dos registros encontrados (cada um como array associativo)
+     *   - 'total': número total de registros que satisfazem os filtros
      */
+
     public function listas(
         string $ordenarPor = 'id',
         string $ordem = 'ASC',

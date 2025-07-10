@@ -104,6 +104,9 @@ CREATE TABLE
         FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+INSERT INTO orgao (id, nome, email, telefone, endereco, municipio, estado, cep, tipo_id, informacoes, site, instagram, twitter, criado_por, gabinete) VALUES
+    ('1', 'Orgao Sistema', 'email@email', '99999999999', 'Endereço do órgão', 'Brasília', 'DF', '70000-000', '1', 'Informações do órgão', 'https://www.orgao-sistema.com.br', 'https://instagram.com/orgao-sistema', 'https://twitter.com/orgao-sistema', '1', '1');
+
 CREATE TABLE
     pessoa_tipo (
         id VARCHAR(36) PRIMARY KEY,

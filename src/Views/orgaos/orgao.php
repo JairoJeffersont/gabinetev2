@@ -94,7 +94,7 @@ if ($buscaOrgao['status'] != 'success') {
                         </div>
 
                         <div class="col-md-2 col-12">
-                            <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP (somente números)" data-mask="00000-000" maxlength="8" value="<?= $buscaOrgao['data']['cep'] ?>">
+                            <input type="text" class="form-control form-control-sm" name="cep" placeholder="CEP (somente números)" data-mask="00000-000" maxlength="9" value="<?= $buscaOrgao['data']['cep'] ?>">
                         </div>
                         <div class="col-md-2 col-6">
                             <select class="form-select form-select-sm" id="estado" name="estado" required data-selected="<?= $buscaOrgao['data']['estado'] ?>">
