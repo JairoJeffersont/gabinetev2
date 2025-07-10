@@ -11,8 +11,8 @@ $gabineteController = new \App\Controllers\GabineteController();
 
 $estadogabinete = $gabineteController->buscar($_SESSION['gabinete'])['data']['estado'];
 
-$ordenarPor = isset($_GET['ordenarPor']) ? $_GET['ordenarPor'] : 'nome';
-$ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'asc';
+$ordenarPor = isset($_GET['ordenarPor']) ? $_GET['ordenarPor'] : 'criado_em';
+$ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'desc';
 $itens = isset($_GET['itens']) ? $_GET['itens'] : 10;
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : '1';
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '0';
@@ -52,7 +52,6 @@ if ($termo !== '') {
                     <p class="card-text mb-0">Nesta seção, é possível gerenciar órgãos ou entidades, garantindo a organização correta dessas informações no sistema.</p>
                 </div>
             </div>
-
             <div class="card mb-2">
                 <div class="card-body custom-card-body p-2">
 
@@ -80,7 +79,7 @@ if ($termo !== '') {
                         if ($result['status'] == 'success') {
                             echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
                         } else if ($result['status'] == 'duplicated') {
-                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
+                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="4">' . $result['message'] . '</div>';
                         } else if ($result['status'] == 'server_error') {
                             echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . ' - ' . $result['error_id'] . '</div>';
                         }
@@ -165,6 +164,7 @@ if ($termo !== '') {
                             <select class="form-select form-select-sm" name="ordenarPor" required>
                                 <option value="nome" <?php echo ($ordenarPor == 'nome') ? 'selected' : ''; ?>>Ordenar por | Nome</option>
                                 <option value="criado_em" <?php echo ($ordenarPor == 'criado_em') ? 'selected' : ''; ?>>Ordenar por | Criação</option>
+                                <option value="municipio" <?php echo ($ordenarPor == 'criado_em') ? 'selected' : ''; ?>>Ordenar por | Município</option>
                             </select>
                         </div>
 
@@ -207,7 +207,7 @@ if ($termo !== '') {
                         </div>
 
                         <div class="col-md-2 col-9">
-                            <input type="text" class="form-control form-control-sm" name="termo" placeholder="Digite o nome que deseja encontrar" value="<?php echo htmlspecialchars($termo); ?>">
+                            <input type="text" class="form-control form-control-sm" name="termo" placeholder="Digite o órgão que deseja encontrar" value="<?php echo htmlspecialchars($termo); ?>">
                         </div>
 
                         <div class="col-md-1 col-3">
@@ -217,15 +217,13 @@ if ($termo !== '') {
                         </div>
 
                     </form>
-
-
                 </div>
             </div>
             <div class="card mb-2 ">
                 <div class="card-body custom-card-body p-1">
                     <div class="table-responsive">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped table-bordered mb-0">
+                            <table class="table table-hover table-striped table-bordered mb-2">
                                 <thead>
                                     <tr>
                                         <th scope="col">Nome</th>
@@ -246,23 +244,57 @@ if ($termo !== '') {
                                             $usuario = $usuarioController->buscar($orgao['criado_por'])['data']['nome'];
                                             $buscaTipo = $tipoOrgaoController->buscar($orgao['tipo_id'])['data']['nome'];
                                             echo '<tr>';
-                                            echo '<td style="white-space: nowrap;"><a href="?secao=orgao&id=' . $orgao['id'] . '">' . htmlspecialchars($orgao['nome']) . '</a></td>';
-                                            echo '<td>' . htmlspecialchars($orgao['email']) . '</td>';
-                                            echo '<td>' . htmlspecialchars($orgao['telefone']) . '</td>';
-                                            echo '<td>' . htmlspecialchars($orgao['endereco']) . '</td>';
-                                            echo '<td>' . htmlspecialchars($orgao['municipio']) . ' / ' . htmlspecialchars($orgao['estado']) . '</td>';
-                                            echo '<td>' . $buscaTipo . '</td>';
-                                            echo '<td>' . date('d/m H:i', strtotime($orgao['criado_em'])) . ' | ' . $usuario . '</td>';
+                                            echo '<td style="white-space: nowrap;"><a href="?secao=orgao&id=' . $orgao['id'] . '">' . htmlspecialchars($orgao['nome'] ?? '') . '</a></td>';
+                                            echo '<td>' . htmlspecialchars($orgao['email'] ?? '') . '</td>';
+                                            echo '<td>' . htmlspecialchars($orgao['telefone'] ?? '') . '</td>';
+                                            echo '<td>' . htmlspecialchars($orgao['endereco'] ?? '') . '</td>';
+                                            echo '<td>' . htmlspecialchars($orgao['municipio'] ?? '') . ' / ' . htmlspecialchars($orgao['estado'] ?? '') . '</td>';
+                                            echo '<td>' . ($buscaTipo ?? '') . '</td>';
+                                            echo '<td>' . date('d/m H:i', strtotime($orgao['criado_em'])) . ' | ' . ($usuario ?? '') . '</td>';
                                             echo '</tr>';
                                         }
                                     } else if ($buscaOrgaos['status'] == 'empty') {
-                                        echo '<tr><td colspan="7" class="text-center">Nenhum órgão encontrado.</td></tr>';
+                                        echo '<tr><td colspan="7">Nenhum órgão encontrado.</td></tr>';
                                     } else if ($buscaOrgaos['status'] == 'server_error') {
-                                        echo '<tr><td colspan="7" class="text-center text-danger">Erro no servidor ao buscar os dados.</td></tr>';
+                                        echo '<tr><td colspan="7">' . $buscaOrgaos['message'] . ' | ' . $buscaOrgaos['error_id'] . '</td></tr>';
                                     }
                                     ?>
                                 </tbody>
                             </table>
+                            <?php
+                            $totalPaginas = $buscaOrgaos['total_paginas'];
+
+                            if ($totalPaginas > 1):
+
+                                $maxLinks = 5;
+                                $meio = floor($maxLinks / 2);
+
+                                $inicio = max(1, $pagina - $meio);
+                                $fim = min($totalPaginas, $inicio + $maxLinks - 1);
+
+                                if ($fim - $inicio + 1 < $maxLinks) {
+                                    $inicio = max(1, $fim - $maxLinks + 1);
+                                }
+                            ?>
+                                <ul class="pagination custom-pagination mb-0">
+                                    <!-- Primeiro -->
+                                    <li class="page-item <?= $pagina == 1 ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?secao=orgaos&ordenarPor=<?= $ordenarPor ?>&ordem=<?= $ordem ?>&itens=<?= $itens ?>&tipo=<?= $tipo ?>&estado=<?= $estado ?>&termo=<?= urlencode($termo) ?>&pagina=1">Primeiro</a>
+                                    </li>
+
+                                    <!-- Números de página -->
+                                    <?php for ($i = $inicio; $i <= $fim; $i++): ?>
+                                        <li class="page-item <?= $pagina == $i ? 'active' : '' ?>">
+                                            <a class="page-link" href="?secao=orgaos&ordenarPor=<?= $ordenarPor ?>&ordem=<?= $ordem ?>&itens=<?= $itens ?>&tipo=<?= $tipo ?>&estado=<?= $estado ?>&termo=<?= urlencode($termo) ?>&pagina=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                    <?php endfor; ?>
+
+                                    <!-- Último -->
+                                    <li class="page-item <?= $pagina == $totalPaginas ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?secao=orgaos&ordenarPor=<?= $ordenarPor ?>&ordem=<?= $ordem ?>&itens=<?= $itens ?>&tipo=<?= $tipo ?>&estado=<?= $estado ?>&termo=<?= urlencode($termo) ?>&pagina=<?= $totalPaginas ?>">Último</a>
+                                    </li>
+                                </ul>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

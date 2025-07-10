@@ -51,3 +51,14 @@ body {
 .dropdown-item-custom {
     font-size: 0.85em;
 }
+
+.custom-pagination {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: left; /* Centraliza os itens */
+}
+
+
+.custom-pagination .page-link {
+    font-size: 1em;
+}
