@@ -18,7 +18,7 @@ class PessoaController extends BaseController {
     public function novaPessoa($dados) {
 
         if (isset($dados['foto'])) {
-            $result = $this->fileUploader->uploadFile('arquivos/pessoas_fotos', $dados['foto'], ['image/jpeg', 'image/png'], 2);
+            $result = $this->fileUploader->uploadFile('arquivos/pessoas_fotos', $dados['foto'], ['image/jpeg', 'image/png'], 5);
             if ($result['status'] == 'success') {
                 $dados['foto'] = $result['file_path'];
             } else {
@@ -34,7 +34,7 @@ class PessoaController extends BaseController {
         $busca = $this->buscar($id);
 
         if (isset($dados['foto'])) {
-            $result = $this->fileUploader->uploadFile('arquivos/pessoas_fotos', $dados['foto'], ['image/jpeg', 'image/png'], 2);
+            $result = $this->fileUploader->uploadFile('arquivos/pessoas_fotos', $dados['foto'], ['image/jpeg', 'image/png'], 5);
             if ($result['status'] == 'success') {
                 if (!empty($busca['data']['foto'])) {
                     $this->fileUploader->deleteFile($busca['data']['foto']);

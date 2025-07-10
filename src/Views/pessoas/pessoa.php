@@ -61,7 +61,7 @@ if ($buscaPessoa['status'] != 'success') {
                         'cep' => $_POST['cep'] ?? '',
                         'estado' => $_POST['estado'] ?? '',
                         'municipio' => $_POST['municipio'] ?? '',
-                        'sexo' => $_POST['sexo'] ?? 'Não informado', // Atualizado para "genero"
+                        'sexo' => $_POST['sexo'] ?? 'Não informado',
                         'facebook' => $_POST['facebook'] ?? '',
                         'instagram' => $_POST['instagram'] ?? '',
                         'twitter' => $_POST['twitter'] ?? '',
@@ -87,7 +87,7 @@ if ($buscaPessoa['status'] != 'success') {
                             echo '<script>
                                         setTimeout(function() {
                                             window.location.href = "?secao=pessoa&id=' . $pessoaGet . '";
-                                        }, 1000); // 2000 milissegundos = 2 segundos
+                                        }, 500);
                                         </script>
                                         ';
                         } else if ($result['status'] == 'server_error') {
@@ -103,6 +103,11 @@ if ($buscaPessoa['status'] != 'success') {
                         } else if ($result['status'] == 'server_error' || $result['status'] == 'forbidden') {
                             echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
                         }
+                    }
+
+
+                    if ($buscaPessoa['data']['aniversario'] == date('d/m')) {
+                        echo '<div class="alert alert-warning custom-alert px-2 py-1 mb-2" role="alert"><i class="bi bi-cake-fill text-warning"></i> Hoje é aniversário dessa pessoa!</div>';
                     }
 
 
