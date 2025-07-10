@@ -105,7 +105,7 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO orgao (id, nome, email, telefone, endereco, municipio, estado, cep, tipo_id, informacoes, site, instagram, twitter, criado_por, gabinete) VALUES
-    ('1', 'Orgao Sistema', 'email@email', '99999999999', 'Endereço do órgão', 'Brasília', 'DF', '70000-000', '1', 'Informações do órgão', 'https://www.orgao-sistema.com.br', 'https://instagram.com/orgao-sistema', 'https://twitter.com/orgao-sistema', '1', '1');
+    ('1', 'Órgão não informado', 'email@email', '99999999999', 'Endereço do órgão', 'Brasília', 'DF', '70000-000', '1', 'Informações do órgão', 'https://www.orgao-sistema.com.br', 'https://instagram.com/orgao-sistema', 'https://twitter.com/orgao-sistema', '1', '1');
 
 CREATE TABLE
     pessoa_tipo (
@@ -119,12 +119,15 @@ CREATE TABLE
         FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+INSERT INTO pessoa_tipo (id, nome, gabinete, criado_por) VALUES
+    ('1', 'Sem tipo definido', '1', '1');
+
 CREATE TABLE
     pessoa (
         id VARCHAR(36) NOT NULL PRIMARY KEY,
         nome VARCHAR(255) NOT NULL,
-        aniversario DATE DEFAULT NULL,
-        email VARCHAR(255) NOT NULL UNIQUE,
+        aniversario VARCHAR(5) DEFAULT NULL,
+        email VARCHAR(255) NOT NULL,
         telefone VARCHAR(255) DEFAULT NULL,
         endereco TEXT DEFAULT NULL,
         bairro TEXT DEFAULT NULL,
@@ -137,14 +140,14 @@ CREATE TABLE
         twitter VARCHAR(255) DEFAULT NULL,
         informacoes TEXT DEFAULT NULL,
         profissao VARCHAR(36) NOT NULL,
-        importancia VARCHAR(20) DEFAULT 'Neutro',
+        importancia VARCHAR(20) DEFAULT NULL,
         tipo_id VARCHAR(36) NOT NULL,
         orgao VARCHAR(36) NOT NULL,
         gabinete VARCHAR(36) NOT NULL,
         foto TEXT DEFAULT NULL,
         criado_por VARCHAR(36) NOT NULL,
         criado_em TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-        atualizada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (tipo_id) REFERENCES pessoa_tipo (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
         FOREIGN KEY (orgao) REFERENCES orgao (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
         FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,

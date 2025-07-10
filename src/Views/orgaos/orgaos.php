@@ -25,6 +25,9 @@ $filtros = [];
 if ($tipo !== '0') {
     $filtros['tipo_id'] = ['=' => $tipo];
 }
+
+
+
 if ($estado !== '0') {
     $filtros['estado'] = ['=' => $estado];
 }
