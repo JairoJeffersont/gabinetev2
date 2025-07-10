@@ -76,7 +76,7 @@ if ($termo !== '') {
                         'cep' => $_POST['cep'] ?? '',
                         'estado' => $_POST['estado'] ?? '',
                         'municipio' => $_POST['municipio'] ?? '',
-                        'genero' => $_POST['genero'] ?? 'Não informado', // Atualizado para "genero"
+                        'sexo' => $_POST['sexo'] ?? 'Não informado', // Atualizado para "genero"
                         'facebook' => $_POST['facebook'] ?? '',
                         'instagram' => $_POST['instagram'] ?? '',
                         'twitter' => $_POST['twitter'] ?? '',
@@ -204,7 +204,7 @@ if ($termo !== '') {
                             </div>
                         </div>
                         <div class="col-md-3 col-12">
-                            <input type="text" class="form-control form-control-sm" name="profissao" placeholder="Profissão">
+                            <input type="text" class="form-control form-control-sm" name="profissao" placeholder="Profissão. (ex. Advogado, Professor...)">
                         </div>
                         <div class="col-md-2 col-12">
                             <select class="form-select form-select-sm" id="importancia" name="importancia" required>
@@ -223,7 +223,7 @@ if ($termo !== '') {
                             <textarea class="form-control form-control-sm" name="informacoes" rows="5" placeholder="Informações importantes dessa pessoa"></textarea>
                         </div>
                         <div class="col-md-2 col-6">
-                            <button type="submit" class="btn btn-success btn-sm" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Salvar</button>
+                            <button type="submit" class="btn btn-success btn-sm confirm-action" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Salvar</button>
                         </div>
                     </form>
                 </div>

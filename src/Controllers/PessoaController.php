@@ -36,6 +36,9 @@ class PessoaController extends BaseController {
         if (isset($dados['foto'])) {
             $result = $this->fileUploader->uploadFile('arquivos/pessoas_fotos', $dados['foto'], ['image/jpeg', 'image/png'], 2);
             if ($result['status'] == 'success') {
+                if (!empty($busca['data']['foto'])) {
+                    $this->fileUploader->deleteFile($busca['data']['foto']);
+                }
                 $dados['foto'] = $result['file_path'];
             } else {
                 return $result;
@@ -45,5 +48,13 @@ class PessoaController extends BaseController {
         }
 
         return $this->atualizar($id, $dados);
+    }
+
+    public function apagarPessoa($id) {
+        $busca = $this->buscar($id);
+        if (!empty($busca['data']['foto'])) {
+            $this->fileUploader->deleteFile($busca['data']['foto']);
+        }
+        return $this->apagar($id);
     }
 }

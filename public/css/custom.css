@@ -55,10 +55,45 @@ body {
 .custom-pagination {
     flex-wrap: wrap;
     display: flex;
-    justify-content: left; /* Centraliza os itens */
+    justify-content: left;
+    /* Centraliza os itens */
 }
 
 
 .custom-pagination .page-link {
     font-size: 1em;
+}
+
+.card-perfil {
+    background-image: url('../img/print_bg.jpeg');
+    /* Caminho da imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Se quiser um overlay escuro para melhorar a leitura */
+.card-perfil::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    
+    /* sombra preta com opacidade */
+    z-index: 0;
+}
+
+.card-perfil>* {
+    position: relative;
+    z-index: 1;
+    color: black;
+}
+
+.foto-perfil {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 30%;
+    border: 2px solid #fff;
 }

@@ -127,7 +127,7 @@ CREATE TABLE
         id VARCHAR(36) NOT NULL PRIMARY KEY,
         nome VARCHAR(255) NOT NULL,
         aniversario VARCHAR(5) DEFAULT NULL,
-        email VARCHAR(255) NOT NULL,
+        email VARCHAR(255) DEFAULT NULL,
         telefone VARCHAR(255) DEFAULT NULL,
         endereco TEXT DEFAULT NULL,
         bairro TEXT DEFAULT NULL,

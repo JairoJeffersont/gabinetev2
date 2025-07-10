@@ -73,9 +73,7 @@ if ($buscaOrgao['status'] != 'success') {
                         }
                     }
 
-                    if ($_SESSION['tipo'] != '1' && $_SESSION['tipo'] != '3') {
-                        echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">Você não tem autorização para apagar órgãos/entidades.</div>';
-                    }
+                   
                     ?>
 
 
@@ -142,13 +140,7 @@ if ($buscaOrgao['status'] != 'success') {
                         </div>
                         <div class="col-md-4 col-6">
                             <button type="submit" class="btn btn-success confirm-action  btn-sm" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Atualizar</button>
-                            <?php
-                            if ($_SESSION['tipo'] == '1' || $_SESSION['tipo'] == '3') {
-                                echo '<button type="submit" class="btn btn-danger btn-sm confirm-action" name="btn_apagar"><i class="bi bi-trash"></i> Apagar</button>';
-                            } else {
-                                echo '<button type="submit" class="btn btn-danger btn-sm confirm-action" disabled name="btn_apagar"><i class="bi bi-trash"></i> Apagar</button>';
-                            }
-                            ?>
+                            <button type="submit" class="btn btn-danger btn-sm confirm-action" name="btn_apagar"><i class="bi bi-trash"></i> Apagar</button>
                         </div>
                     </form>
                 </div>
