@@ -7,6 +7,33 @@ include '../src/Views/includes/verificaLogado.php';
 $tipoOrgaoController = new \App\Controllers\OrgaoTipoController();
 $usuarioController = new \App\Controllers\UsuarioController();
 $orgaoController = new \App\Controllers\OrgaoController();
+$gabineteController = new \App\Controllers\GabineteController();
+
+$estadogabinete = $gabineteController->buscar($_SESSION['gabinete'])['data']['estado'];
+
+$ordenarPor = isset($_GET['ordenarPor']) ? $_GET['ordenarPor'] : 'nome';
+$ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'asc';
+$itens = isset($_GET['itens']) ? $_GET['itens'] : 10;
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : '1';
+$tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '0';
+$estado = isset($_GET['estado']) ? $_GET['estado'] : '0';
+$termo = isset($_GET['termo']) ? $_GET['termo'] : '';
+
+$filtros = [];
+
+if ($tipo !== '0') {
+    $filtros['tipo_id'] = $tipo;
+}
+if ($estado !== '0') {
+    $filtros['estado'] = $estado;
+}
+if ($termo !== '') {
+    $filtros['nome'] = $termo;
+}
+
+$buscaOrgaos = $orgaoController->listar($ordenarPor, $ordem, $itens, $pagina, $filtros, 'AND');
+
+print_r($buscaOrgaos); 
 
 ?>
 
@@ -130,6 +157,67 @@ $orgaoController = new \App\Controllers\OrgaoController();
                             <button type="submit" class="btn btn-success confirm-action  btn-sm" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Salvar</button>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="card mb-2 ">
+                <div class="card-body custom-card-body p-1">
+                    <form class="row g-2 form_custom mb-0" action="" method="GET" enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" name="secao" value="orgaos" />
+
+                        <div class="col-md-2 col-6">
+                            <select class="form-select form-select-sm" name="ordenarPor" required>
+                                <option value="nome" <?php echo ($ordenarPor == 'nome') ? 'selected' : ''; ?>>Ordenar por | Nome</option>
+                                <option value="criado_em" <?php echo ($ordenarPor == 'criado_em') ? 'selected' : ''; ?>>Ordenar por | Criação</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 col-6">
+                            <select class="form-select form-select-sm" name="ordem" required>
+                                <option value="asc" <?php echo ($ordem == 'asc') ? 'selected' : ''; ?>>Ordem Crescente</option>
+                                <option value="desc" <?php echo ($ordem == 'desc') ? 'selected' : ''; ?>>Ordem Decrescente</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 col-6">
+                            <select class="form-select form-select-sm" name="itens" required>
+                                <option value="5" <?php echo ($itens == 5) ? 'selected' : ''; ?>>5 itens</option>
+                                <option value="10" <?php echo ($itens == 10) ? 'selected' : ''; ?>>10 itens</option>
+                                <option value="25" <?php echo ($itens == 25) ? 'selected' : ''; ?>>25 itens</option>
+                                <option value="50" <?php echo ($itens == 50) ? 'selected' : ''; ?>>50 itens</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 col-6">
+                            <select class="form-select form-select-sm" name="tipo" required>
+                                <option value="0" <?php echo ($tipo == '0') ? 'selected' : ''; ?>>Todos os tipos</option>
+                                <?php
+                                $buscaTipos = $tipoOrgaoController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
+                                if ($buscaTipos['status'] == 'success') {
+                                    foreach ($buscaTipos['data'] as $tipos) {
+                                        $selected = ($tipo == $tipos['id']) ? 'selected' : '';
+                                        echo '<option value="' . $tipos['id'] . '" ' . $selected . '>' . $tipos['nome'] . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="col-md-1 col-6">
+                            <select class="form-select form-select-sm" name="estado" required>
+                                <option value="0" <?php echo ($estado == '0') ? 'selected' : ''; ?>>Todos os estados</option>
+                                <option value="<?php echo $estadogabinete ?>" <?php echo ($estado == $estadogabinete) ? 'selected' : ''; ?>>Somente <?php echo $estadogabinete ?></option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 col-10">
+                            <input type="text" class="form-control form-control-sm" name="termo" placeholder="Buscar..." value="<?php echo htmlspecialchars($termo); ?>">
+                        </div>
+
+                        <div class="col-md-1 col-2">
+                            <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-search"></i></button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
