@@ -10,7 +10,6 @@ $orgaoController = new \App\Controllers\OrgaoController();
 $gabineteController = new \App\Controllers\GabineteController();
 $pessoaController = new \App\Controllers\PessoaController();
 
-
 $estadogabinete = $gabineteController->buscar($_SESSION['gabinete'])['data']['estado'];
 
 $pessoaGet = isset($_GET['id']) ? $_GET['id'] : '';
@@ -21,7 +20,6 @@ if ($buscaPessoa['status'] != 'success') {
     header('Location: ?secao=pessoas');
 }
 
-
 ?>
 <div class="d-flex" id="wrapper">
 
@@ -30,6 +28,7 @@ if ($buscaPessoa['status'] != 'success') {
     <div id="page-content-wrapper">
         <?php include '../src/Views/base/top_menu.php'; ?>
         <div class="container-fluid p-2">
+            
             <div class="card mb-2 ">
                 <div class="card-body p-1">
                     <a class="btn btn-primary custom-card-body btn-sm" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
@@ -236,8 +235,6 @@ if ($buscaPessoa['status'] != 'success') {
                     </form>
                 </div>
             </div>
-
-
 
         </div>
     </div>
