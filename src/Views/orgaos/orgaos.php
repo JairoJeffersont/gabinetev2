@@ -26,8 +26,6 @@ if ($tipo !== '0') {
     $filtros['tipo_id'] = ['=' => $tipo];
 }
 
-
-
 if ($estado !== '0') {
     $filtros['estado'] = ['=' => $estado];
 }
@@ -35,6 +33,7 @@ if ($termo !== '') {
     $filtros['nome'] = ['LIKE' => "%$termo%"];
 }
 
+$filtros['gabinete'] = $_SESSION['gabinete'];
 
 ?>
 
@@ -88,7 +87,7 @@ if ($termo !== '') {
                             echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . ' - ' . $result['error_id'] . '</div>';
                         }
                     }
-                    
+
                     ?>
 
                     <form class="row g-2 form_custom " id="form_novo" method="POST" enctype="application/x-www-form-urlencoded">
