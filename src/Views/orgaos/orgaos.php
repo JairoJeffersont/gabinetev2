@@ -16,24 +16,21 @@ $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'asc';
 $itens = isset($_GET['itens']) ? $_GET['itens'] : 10;
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : '1';
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '0';
-$estado = isset($_GET['estado']) ? $_GET['estado'] : '0';
+$estado = isset($_GET['estado']) ? $_GET['estado'] : $estadogabinete;
 $termo = isset($_GET['termo']) ? $_GET['termo'] : '';
 
 $filtros = [];
 
 if ($tipo !== '0') {
-    $filtros['tipo_id'] = $tipo;
+    $filtros['tipo_id'] = ['=' => $tipo];
 }
 if ($estado !== '0') {
-    $filtros['estado'] = $estado;
+    $filtros['estado'] = ['=' => $estado];
 }
 if ($termo !== '') {
-    $filtros['nome'] = $termo;
+    $filtros['nome'] = ['LIKE' => "%$termo%"];
 }
 
-$buscaOrgaos = $orgaoController->listar($ordenarPor, $ordem, $itens, $pagina, $filtros, 'AND');
-
-print_r($buscaOrgaos); 
 
 ?>
 
@@ -56,7 +53,7 @@ print_r($buscaOrgaos);
                 </div>
             </div>
 
-            <div class="card shadow-sm mb-2">
+            <div class="card mb-2">
                 <div class="card-body custom-card-body p-2">
 
                     <?php
@@ -202,22 +199,72 @@ print_r($buscaOrgaos);
                             </select>
                         </div>
 
-                        <div class="col-md-1 col-6">
+                        <div class="col-md-1 col-12">
                             <select class="form-select form-select-sm" name="estado" required>
                                 <option value="0" <?php echo ($estado == '0') ? 'selected' : ''; ?>>Todos os estados</option>
                                 <option value="<?php echo $estadogabinete ?>" <?php echo ($estado == $estadogabinete) ? 'selected' : ''; ?>>Somente <?php echo $estadogabinete ?></option>
                             </select>
                         </div>
 
-                        <div class="col-md-2 col-10">
-                            <input type="text" class="form-control form-control-sm" name="termo" placeholder="Buscar..." value="<?php echo htmlspecialchars($termo); ?>">
+                        <div class="col-md-2 col-9">
+                            <input type="text" class="form-control form-control-sm" name="termo" placeholder="Digite o nome que deseja encontrar" value="<?php echo htmlspecialchars($termo); ?>">
                         </div>
 
-                        <div class="col-md-1 col-2">
-                            <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-search"></i></button>
+                        <div class="col-md-1 col-3">
+                            <button type="submit" class="btn btn-primary btn-sm w-100 w-md-auto">
+                                <i class="bi bi-search"></i> Buscar
+                            </button>
                         </div>
+
                     </form>
 
+
+                </div>
+            </div>
+            <div class="card mb-2 ">
+                <div class="card-body custom-card-body p-1">
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped table-bordered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Telefone</th>
+                                        <th scope="col">Endereço</th>
+                                        <th scope="col">UF/Município</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col" style="white-space: nowrap;">Criado em | por</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $buscaOrgaos = $orgaoController->listar($ordenarPor, $ordem, $itens, $pagina, $filtros, 'AND');
+
+                                    if ($buscaOrgaos['status'] == 'success') {
+                                        foreach ($buscaOrgaos['data'] as $orgao) {
+                                            $usuario = $usuarioController->buscar($orgao['criado_por'])['data']['nome'];
+                                            $buscaTipo = $tipoOrgaoController->buscar($orgao['tipo_id'])['data']['nome'];
+                                            echo '<tr>';
+                                            echo '<td style="white-space: nowrap;"><a href="?secao=orgao&id=' . $orgao['id'] . '">' . htmlspecialchars($orgao['nome']) . '</a></td>';
+                                            echo '<td>' . htmlspecialchars($orgao['email']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($orgao['telefone']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($orgao['endereco']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($orgao['municipio']) . ' / ' . htmlspecialchars($orgao['estado']) . '</td>';
+                                            echo '<td>' . $buscaTipo . '</td>';
+                                            echo '<td>' . date('d/m H:i', strtotime($orgao['criado_em'])) . ' | ' . $usuario . '</td>';
+                                            echo '</tr>';
+                                        }
+                                    } else if ($buscaOrgaos['status'] == 'empty') {
+                                        echo '<tr><td colspan="7" class="text-center">Nenhum órgão encontrado.</td></tr>';
+                                    } else if ($buscaOrgaos['status'] == 'server_error') {
+                                        echo '<tr><td colspan="7" class="text-center text-danger">Erro no servidor ao buscar os dados.</td></tr>';
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

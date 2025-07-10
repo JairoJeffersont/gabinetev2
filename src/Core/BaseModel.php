@@ -161,7 +161,7 @@ abstract class BaseModel {
         int $itens = 10,
         int $pagina = 1,
         array $condicoes = [],
-        string $operador = 'OR' // novo parâmetro
+        string $operador = 'OR'
     ): array {
         $offset = ($pagina - 1) * $itens;
 
@@ -169,21 +169,27 @@ abstract class BaseModel {
         $parametros = [];
         $contador = 0;
 
-        foreach ($condicoes as $coluna => $valores) {
-            if (!is_array($valores)) {
-                $valores = [$valores];
+        foreach ($condicoes as $coluna => $filtros) {
+            // Se não for array, trata como igualdade simples
+            if (!is_array($filtros)) {
+                $filtros = ['=' => $filtros];
             }
-            foreach ($valores as $valor) {
+
+            foreach ($filtros as $op => $valor) {
+                $op = strtoupper(trim($op));
                 $param = "{$coluna}_{$contador}";
-                $whereParts[] = "$coluna = :$param";
+
+                if (!in_array($op, ['=', 'LIKE', '>', '<', '>=', '<='])) {
+                    continue; // ignora operadores inválidos
+                }
+
+                $whereParts[] = "$coluna $op :$param";
                 $parametros[$param] = $valor;
                 $contador++;
             }
         }
 
-        // garante que o operador seja seguro
         $operador = strtoupper($operador) === 'OR' ? 'OR' : 'AND';
-
         $whereSql = !empty($whereParts) ? ' WHERE ' . implode(" $operador ", $whereParts) : '';
 
         $ordem = strtoupper($ordem) === 'DESC' ? 'DESC' : 'ASC';
@@ -217,6 +223,7 @@ abstract class BaseModel {
             'total' => $total
         ];
     }
+
 
 
 
