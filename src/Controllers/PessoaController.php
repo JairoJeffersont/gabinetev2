@@ -20,7 +20,7 @@ class PessoaController extends BaseController {
         if (isset($dados['foto'])) {
             $result = $this->fileUploader->uploadFile('arquivos/pessoas_fotos', $dados['foto'], ['image/jpeg', 'image/png'], 5);
             if ($result['status'] == 'success') {
-                $dados['foto'] = $result['file_path'];
+                $dados['foto'] = 'public/'.$result['file_path'];
             } else {
                 return $result;
             }
@@ -39,7 +39,7 @@ class PessoaController extends BaseController {
                 if (!empty($busca['data']['foto'])) {
                     $this->fileUploader->deleteFile($busca['data']['foto']);
                 }
-                $dados['foto'] = $result['file_path'];
+                $dados['foto'] = 'public/'.$result['file_path'];
             } else {
                 return $result;
             }

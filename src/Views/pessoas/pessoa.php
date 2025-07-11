@@ -37,7 +37,7 @@ if ($buscaPessoa['status'] != 'success') {
             </div>
 
             <div class="card card-perfil w-100 p-2 d-flex flex-row align-items-center mb-2 text-white">
-                <img src="<?= ($buscaPessoa['data']['foto']) ? $buscaPessoa['data']['foto'] : 'img/not_found.jpg' ?>" alt="Foto do usuário" class="foto-perfil me-3">
+                <img src="<?= ($buscaPessoa['data']['foto']) ? $buscaPessoa['data']['foto'] : 'public/img/images.png' ?>" alt="Foto do usuário" class="foto-perfil me-3">
                 <div>
                     <h5 class="mb-1"><?= $buscaPessoa['data']['nome'] ?></h5>
                     <p class="mb-0"><?= ($buscaPessoa['data']['email']) ? $buscaPessoa['data']['email'] : 'Email não informado' ?></p>
