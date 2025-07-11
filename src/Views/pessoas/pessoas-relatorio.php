@@ -67,7 +67,7 @@ if ($buscaPessoas['status'] == 'success') {
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTipo">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTipo" aria-expanded="true" aria-controls="collapseTipo">
-                            <i class="bi bi-list-ul me-2"></i> Pessoas por Tipo
+                            <i class="bi bi-list-ul me-2"></i> Por Tipo
                         </button>
                     </h2>
                     <div id="collapseTipo" class="accordion-collapse collapse" aria-labelledby="headingTipo" data-bs-parent="#accordionPessoas">
@@ -133,7 +133,7 @@ if ($buscaPessoas['status'] == 'success') {
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingSexo">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSexo" aria-expanded="false" aria-controls="collapseSexo">
-                            <i class="bi bi-gender-ambiguous me-2"></i> Pessoas por Gênero
+                            <i class="bi bi-gender-ambiguous me-2"></i> Por gênero
                         </button>
                     </h2>
                     <div id="collapseSexo" class="accordion-collapse collapse" aria-labelledby="headingSexo" data-bs-parent="#accordionPessoas">
@@ -199,7 +199,7 @@ if ($buscaPessoas['status'] == 'success') {
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingProfissao">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProfissao" aria-expanded="false" aria-controls="collapseProfissao">
-                            <i class="bi bi-briefcase me-2"></i> Pessoas por Profissão
+                            <i class="bi bi-briefcase me-2"></i> Por profissão
                         </button>
                     </h2>
                     <div id="collapseProfissao" class="accordion-collapse collapse" aria-labelledby="headingProfissao" data-bs-parent="#accordionPessoas">
@@ -267,7 +267,7 @@ if ($buscaPessoas['status'] == 'success') {
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingMunicipio">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMunicipio" aria-expanded="false" aria-controls="collapseMunicipio">
-                            <i class="bi bi-geo-alt me-2"></i> Pessoas por Município (Estado: <?= strtoupper($estado) ?>)
+                            <i class="bi bi-geo-alt me-2"></i> Por município (Estado: <?= strtoupper($estado) ?>)
                         </button>
                     </h2>
                     <div id="collapseMunicipio" class="accordion-collapse collapse" aria-labelledby="headingMunicipio" data-bs-parent="#accordionPessoas">
@@ -336,7 +336,7 @@ if ($buscaPessoas['status'] == 'success') {
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingImportancia">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportancia" aria-expanded="false" aria-controls="collapseImportancia">
-                            <i class="bi bi-star me-2"></i> Pessoas por Importância
+                            <i class="bi bi-star me-2"></i> Por importância
                         </button>
                     </h2>
                     <div id="collapseImportancia" class="accordion-collapse collapse" aria-labelledby="headingImportancia" data-bs-parent="#accordionPessoas">
@@ -402,7 +402,7 @@ if ($buscaPessoas['status'] == 'success') {
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOrgao">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrgao" aria-expanded="false" aria-controls="collapseOrgao">
-                            <i class="bi bi-building me-2"></i> Pessoas por Órgão
+                            <i class="bi bi-building me-2"></i> Por orgão
                         </button>
                     </h2>
                     <div id="collapseOrgao" class="accordion-collapse collapse" aria-labelledby="headingOrgao" data-bs-parent="#accordionPessoas">

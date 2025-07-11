@@ -92,7 +92,7 @@ if ($termo !== '') {
                         'twitter' => $_POST['twitter'] ?? '',
                         'orgao' => $_POST['orgao'] ?? '',
                         'tipo_id' => $_POST['tipo_id'] ?? '',
-                        'profissao' => $_POST['profissao'] ?? '',
+                        'profissao' => $_POST['profissao'] ?? 'Profissão não informada',
                         'importancia' => $_POST['importancia'] ?? '',
                         'informacoes' => $_POST['informacoes'] ?? '',
                         'criado_por' => $_SESSION['id'],
