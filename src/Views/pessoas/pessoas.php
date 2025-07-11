@@ -62,6 +62,16 @@ if ($termo !== '') {
                 </div>
             </div>
             <div class="card mb-2">
+                <div class="card-body custom-card-body p-1">
+                    <form class="row g-2 form_custom mb-0" method="post" enctype="application/x-www-form-urlencoded">
+                        <div class="col-md-12 col-12">                            
+                            <a href="?secao=pessoas-imprimir" type="button" target="_blank" class="btn btn-secondary btn-sm""><i class="bi bi-printer-fill"></i> Imprimir</a>
+                            <a href="?secao=pessoas-relatorios" type="button" class="btn btn-primary btn-sm""><i class="bi bi-file-earmark-bar-graph"></i> Mostrar relatório</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card mb-2">
                 <div class="card-body custom-card-body p-2">
 
                     <?php

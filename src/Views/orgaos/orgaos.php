@@ -153,11 +153,11 @@ $filtros['gabinete'] = $_SESSION['gabinete'];
                         </div>
                         <div class="col-md-4 col-12">
                             <button type="submit" class="btn btn-success confirm-action  btn-sm" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Salvar</button>
-                            <a href="?secao=exportar" type="submit" class="btn btn-primary confirm-action  btn-sm"><i class="bi bi-download"></i> Exportar dados</a>
                         </div>
                     </form>
                 </div>
             </div>
+            
             <div class="card mb-2 ">
                 <div class="card-body custom-card-body p-1">
                     <form class="row g-2 form_custom mb-0" action="" method="GET" enctype="application/x-www-form-urlencoded">

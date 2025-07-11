@@ -19,6 +19,7 @@ $rotas = [
     'tipo-pessoa' => '../src/Views/pessoas/tipo-pessoa.php',
     'pessoas' => '../src/Views/pessoas/pessoas.php',
     'pessoa' => '../src/Views/pessoas/pessoa.php',
+    'pessoas-relatorios' => '../src/Views/pessoas/pessoas-relatorio.php'
 ];
 
 if (array_key_exists($pagina, $rotas)) {
