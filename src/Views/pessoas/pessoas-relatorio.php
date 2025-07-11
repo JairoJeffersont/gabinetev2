@@ -7,6 +7,7 @@ include '../src/Views/includes/verificaLogado.php';
 $pessoaController = new \App\Controllers\PessoaController();
 $tipoPessoaController = new \App\Controllers\PessoaTipoController();
 $gabineteController = new \App\Controllers\GabineteController();
+$orgaoController = new \App\Controllers\OrgaoController();
 
 $estadogabinete = $gabineteController->buscar($_SESSION['gabinete'])['data']['estado'];
 
@@ -331,6 +332,139 @@ if ($buscaPessoas['status'] == 'success') {
                         </div>
                     </div>
                 </div>
+                <!-- Pessoas por Importância -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingImportancia">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImportancia" aria-expanded="false" aria-controls="collapseImportancia">
+                            <i class="bi bi-star me-2"></i> Pessoas por Importância
+                        </button>
+                    </h2>
+                    <div id="collapseImportancia" class="accordion-collapse collapse" aria-labelledby="headingImportancia" data-bs-parent="#accordionPessoas">
+                        <div class="accordion-body p-0">
+                            <div class="card mb-0 border-0">
+                                <div class="card-body custom-card-body p-2">
+                                    <table class="table table-hover table-striped table-bordered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Importância</th>
+                                                <th>Quantidade</th>
+                                                <th>(%) total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $importanciaContagem = [];
+
+                                            foreach ($buscaPessoas['data'] as $pessoa) {
+                                                $importancia = trim($pessoa['importancia'] ?? '') ?: 'Não informada';
+                                                if (!isset($importanciaContagem[$importancia])) {
+                                                    $importanciaContagem[$importancia] = 0;
+                                                }
+                                                $importanciaContagem[$importancia]++;
+                                            }
+
+                                            $dadosImportancia = [];
+                                            foreach ($importanciaContagem as $importancia => $quantidade) {
+                                                $percentual = ($quantidade / $totalPessoas) * 100;
+                                                $dadosImportancia[] = [
+                                                    'importancia' => $importancia,
+                                                    'quantidade' => $quantidade,
+                                                    'percentual' => $percentual
+                                                ];
+                                            }
+
+                                            usort($dadosImportancia, fn($a, $b) => $b['percentual'] <=> $a['percentual']);
+
+                                            foreach ($dadosImportancia as $item) {
+                                                echo "<tr>
+                                                        <td>{$item['importancia']}</td>
+                                                        <td>{$item['quantidade']}</td>
+                                                        <td>
+                                                            <div class='d-flex align-items-center gap-2'>
+                                                                <span>" . number_format($item['percentual'], 1, ',', '') . "%</span>
+                                                                <div class='progress flex-grow-1' style='height: 8px;'>
+                                                                    <div class='progress-bar bg-primary' role='progressbar' style='width: {$item['percentual']}%;'></div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>";
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pessoas por Órgão -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOrgao">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrgao" aria-expanded="false" aria-controls="collapseOrgao">
+                            <i class="bi bi-building me-2"></i> Pessoas por Órgão
+                        </button>
+                    </h2>
+                    <div id="collapseOrgao" class="accordion-collapse collapse" aria-labelledby="headingOrgao" data-bs-parent="#accordionPessoas">
+                        <div class="accordion-body p-0">
+                            <div class="card mb-0 border-0">
+                                <div class="card-body custom-card-body p-2">
+                                    <table class="table table-hover table-striped table-bordered mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Órgão</th>
+                                                <th>Quantidade</th>
+                                                <th>(%) total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $orgaoContagem = [];
+
+                                            foreach ($buscaPessoas['data'] as $pessoa) {
+                                                $orgao = trim($pessoa['orgao'] ?? '') ?: 'Não informado';
+                                                if (!isset($orgaoContagem[$orgao])) {
+                                                    $orgaoContagem[$orgao] = 0;
+                                                }
+                                                $orgaoContagem[$orgao]++;
+                                            }
+
+                                            $dadosOrgao = [];
+                                            foreach ($orgaoContagem as $orgao => $quantidade) {
+                                                $percentual = ($quantidade / $totalPessoas) * 100;
+                                                $dadosOrgao[] = [
+                                                    'orgao' => $orgao,
+                                                    'quantidade' => $quantidade,
+                                                    'percentual' => $percentual
+                                                ];
+                                            }
+
+                                            usort($dadosOrgao, fn($a, $b) => $b['percentual'] <=> $a['percentual']);
+
+                                            foreach ($dadosOrgao as $item) {
+                                                echo "<tr>
+                                                        <td>".$orgaoController->buscar($item['orgao'])['data']['nome']."</td>
+                                                        <td>{$item['quantidade']}</td>
+                                                        <td>
+                                                            <div class='d-flex align-items-center gap-2'>
+                                                                <span>" . number_format($item['percentual'], 1, ',', '') . "%</span>
+                                                                <div class='progress flex-grow-1' style='height: 8px;'>
+                                                                    <div class='progress-bar bg-secondary' role='progressbar' style='width: {$item['percentual']}%;'></div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>";
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
 
