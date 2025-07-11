@@ -237,7 +237,7 @@ if ($termo !== '') {
                             <select class="form-select form-select-sm" name="ordenarPor" required>
                                 <option value="nome" <?php echo ($ordenarPor == 'nome') ? 'selected' : ''; ?>>Ordenar por | Nome</option>
                                 <option value="criado_em" <?php echo ($ordenarPor == 'criado_em') ? 'selected' : ''; ?>>Ordenar por | Criação</option>
-                                <option value="municipio" <?php echo ($ordenarPor == 'criado_em') ? 'selected' : ''; ?>>Ordenar por | Município</option>
+                                <option value="municipio" <?php echo ($ordenarPor == 'municipio') ? 'selected' : ''; ?>>Ordenar por | Município</option>
                             </select>
                         </div>
 
