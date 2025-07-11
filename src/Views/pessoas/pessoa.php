@@ -28,7 +28,7 @@ if ($buscaPessoa['status'] != 'success') {
     <div id="page-content-wrapper">
         <?php include '../src/Views/base/top_menu.php'; ?>
         <div class="container-fluid p-2">
-            
+
             <div class="card mb-2 ">
                 <div class="card-body p-1">
                     <a class="btn btn-primary custom-card-body btn-sm" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
@@ -213,13 +213,13 @@ if ($buscaPessoa['status'] != 'success') {
                         </div>
                         <div class="col-md-2 col-12">
                             <select class="form-select form-select-sm" id="importancia" name="importancia" required>
-                                <option value="" disabled <?= empty($buscaPessoa['data']['importancia']) ? 'selected' : '' ?>>Selecione a importância</option>
-                                <option value="Baixa" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Baixa' ? 'selected' : '' ?>>Baixa</option>
-                                <option value="Média" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Média' ? 'selected' : '' ?>>Média</option>
-                                <option value="Neutra" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Neutra' ? 'selected' : '' ?>>Neutra</option>
-                                <option value="Alta" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Alta' ? 'selected' : '' ?>>Alta</option>
-                                <option value="Muito Alta" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Muito Alta' ? 'selected' : '' ?>>Muito Alta</option>
+                                <option value="" disabled <?= empty($buscaPessoa['data']['importancia']) ? 'selected' : '' ?>>🔽 Selecione a importância</option>
+                                <option value="Baixa" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Baixa' ? 'selected' : '' ?>>🟢 Baixa</option>
+                                <option value="Média" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Média' ? 'selected' : '' ?>>🟡 Média</option>
+                                <option value="Alta" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Alta' ? 'selected' : '' ?>>🟠 Alta</option>
+                                <option value="Muito Alta" <?= ($buscaPessoa['data']['importancia'] ?? '') === 'Muito Alta' ? 'selected' : '' ?>>🔴 Muito Alta</option>
                             </select>
+
 
                         </div>
                         <div class="col-md-4 col-12">

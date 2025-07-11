@@ -76,7 +76,7 @@ if ($termo !== '') {
                         'cep' => $_POST['cep'] ?? '',
                         'estado' => $_POST['estado'] ?? '',
                         'municipio' => $_POST['municipio'] ?? '',
-                        'sexo' => $_POST['sexo'] ?? 'Não informado', // Atualizado para "genero"
+                        'sexo' => $_POST['sexo'] ?? 'Não informado',
                         'facebook' => $_POST['facebook'] ?? '',
                         'instagram' => $_POST['instagram'] ?? '',
                         'twitter' => $_POST['twitter'] ?? '',
@@ -211,7 +211,6 @@ if ($termo !== '') {
                                 <option value="" disabled selected>🔽 Selecione a importância</option>
                                 <option value="Baixa">🟢 Baixa</option>
                                 <option value="Média">🟡 Média</option>
-                                <option value="Neutra">⚪ Neutra</option>
                                 <option value="Alta">🟠 Alta</option>
                                 <option value="Muito Alta">🔴 Muito Alta</option>
                             </select>
@@ -277,7 +276,6 @@ if ($termo !== '') {
                                 <option value="0" <?= empty($importancia) ? 'selected' : '' ?>>🔽 Selecione a importância</option>
                                 <option value="baixa" <?= $importancia === 'baixa' ? 'selected' : '' ?>>🟢 Baixa</option>
                                 <option value="media" <?= $importancia === 'media' ? 'selected' : '' ?>>🟡 Média</option>
-                                <option value="neutra" <?= $importancia === 'neutra' ? 'selected' : '' ?>>⚪ Neutra</option>
                                 <option value="alta" <?= $importancia === 'alta' ? 'selected' : '' ?>>🟠 Alta</option>
                                 <option value="muito_alta" <?= $importancia === 'muito_alta' ? 'selected' : '' ?>>🔴 Muito Alta</option>
                             </select>
