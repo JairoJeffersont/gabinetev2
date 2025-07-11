@@ -1,8 +1,8 @@
-<link href="../css/cadastro.css" rel="stylesheet" />
+<link href="public/css/cadastro.css" rel="stylesheet" />
 
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="centralizada text-center">
-        <img src="../img/logo_white.png" alt="" class="img_logo" />
+        <img src="public/img/logo_white.png" alt="" class="img_logo" />
         <h2 class="login_title mb-1">Mandato Digital</h2>
         <h6 class="host mb-3">Novo usuário | Todos os campos são obrigatórios</h6>
         <?php

@@ -208,13 +208,14 @@ if ($termo !== '') {
                         </div>
                         <div class="col-md-2 col-12">
                             <select class="form-select form-select-sm" id="importancia" name="importancia" required>
-                                <option value="" disabled selected>Selecione a importância</option>
-                                <option value="Baixa">Baixa</option>
-                                <option value="Média">Média</option>
-                                <option value="Neutra">Neutra</option>
-                                <option value="Alta">Alta</option>
-                                <option value="Muito Alta">Muito Alta</option>
+                                <option value="" disabled selected>🔽 Selecione a importância</option>
+                                <option value="Baixa">🟢 Baixa</option>
+                                <option value="Média">🟡 Média</option>
+                                <option value="Neutra">⚪ Neutra</option>
+                                <option value="Alta">🟠 Alta</option>
+                                <option value="Muito Alta">🔴 Muito Alta</option>
                             </select>
+
                         </div>
                         <div class="col-md-4 col-12">
                             <input type="file" class="form-control form-control-sm" name="foto" />
@@ -273,13 +274,14 @@ if ($termo !== '') {
                         </div>
                         <div class="col-md-2 col-12">
                             <select class="form-select form-select-sm" id="importancia" name="importancia" required>
-                                <option value="0"  <?= empty($importancia) ? 'selected' : '' ?>>Selecione a importância</option>
-                                <option value="baixa" <?= $importancia === 'baixa' ? 'selected' : '' ?>>Baixa</option>
-                                <option value="media" <?= $importancia === 'media' ? 'selected' : '' ?>>Média</option>
-                                <option value="neutra" <?= $importancia === 'neutra' ? 'selected' : '' ?>>Neutra</option>
-                                <option value="alta" <?= $importancia === 'alta' ? 'selected' : '' ?>>Alta</option>
-                                <option value="muito_alta" <?= $importancia === 'muito_alta' ? 'selected' : '' ?>>Muito Alta</option>
+                                <option value="0" <?= empty($importancia) ? 'selected' : '' ?>>🔽 Selecione a importância</option>
+                                <option value="baixa" <?= $importancia === 'baixa' ? 'selected' : '' ?>>🟢 Baixa</option>
+                                <option value="media" <?= $importancia === 'media' ? 'selected' : '' ?>>🟡 Média</option>
+                                <option value="neutra" <?= $importancia === 'neutra' ? 'selected' : '' ?>>⚪ Neutra</option>
+                                <option value="alta" <?= $importancia === 'alta' ? 'selected' : '' ?>>🟠 Alta</option>
+                                <option value="muito_alta" <?= $importancia === 'muito_alta' ? 'selected' : '' ?>>🔴 Muito Alta</option>
                             </select>
+
                         </div>
 
 

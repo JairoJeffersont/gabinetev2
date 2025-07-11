@@ -1,8 +1,8 @@
-<link href="../css/cadastro.css" rel="stylesheet" />
+<link href="public/css/cadastro.css" rel="stylesheet" />
 
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="centralizada text-center">
-        <img src="../img/logo_white.png" alt="" class="img_logo" />
+        <img src="public/img/logo_white.png" alt="" class="img_logo" />
         <h2 class="login_title mb-2">Mandato Digital</h2>
         <p class="text-white">Nova senha</p>
 
