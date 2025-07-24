@@ -48,4 +48,13 @@ class UsuarioController extends BaseController {
 
         return $this->atualizar($id, $dados);
     }
+
+
+    public function apagarUsuario($id) {
+        $busca = $this->buscar($id);
+        if (!empty($busca['data']['foto'])) {
+            print_r($this->fileUploader->deleteFile($busca['data']['foto']));
+        }
+        return $this->apagar($id);
+    }    
 }

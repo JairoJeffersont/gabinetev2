@@ -25,8 +25,8 @@ if ($buscaTipo['status'] != 'success') {
         <div class="container-fluid p-2">
             <div class="card mb-2 ">
                 <div class="card-body p-1">
-                    <a class="btn btn-primary custom-card-body btn-sm" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
-                    <a class="btn btn-success custom-card-body btn-sm" href="?secao=tipos-pessoas" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
+                    <a class="btn btn-primary custom-card-body btn-sm link_loading" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
+                    <a class="btn btn-success custom-card-body btn-sm link_loading" href="?secao=tipos-pessoas" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
                 </div>
             </div>
             <div class="card mb-2">

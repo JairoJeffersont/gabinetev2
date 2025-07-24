@@ -21,8 +21,8 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
 
 ?>
 <div class="card mb-2 ">
-    <div class="card-body custom-card-body p-1">
-        <a class="btn btn-primary btn-sm" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
+    <div class="card-body p-1">
+        <a class="btn btn-primary custom-card-body btn-sm link_loading" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
     </div>
 </div>
 
@@ -97,7 +97,7 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
         <p class="card-text mb-2"><b>Meus dados</b></p>
 
         <?php
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_atualizar_usuario'])) {
 
             $dadosUsuario = [
@@ -138,7 +138,7 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
             <div class="col-md-1 col-6">
                 <input type="text" class="form-control form-control-sm" name="usuario_aniversario" data-mask="00/00" placeholder="Aniversário (dd/mm)" value="<?= $buscaUsuario['data']['aniversario'] ?>">
             </div>
-            <div class="col-md-2 col-6">
+            <div class="col-md-2 col-12">
                 <input type="file" class="form-control form-control-sm" name="usuario_foto">
             </div>
             <div class="col-md-1 col-12">
@@ -152,7 +152,7 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
 
 $protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
 $host = $_SERVER['HTTP_HOST'];
-$caminho = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+$caminho = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/public\\');
 $linkCadastro = "$protocolo://$host$caminho/?secao=novo-usuario&gabinete=" . urlencode($gabineteSessao);
 ?>
 
@@ -192,7 +192,7 @@ $linkCadastro = "$protocolo://$host$caminho/?secao=novo-usuario&gabinete=" . url
                         foreach ($buscaUsuarios['data'] as $usuario) {
                             echo '<tr>
                                     <td>' . (($usuario['id'] !== $usuarioSessao)
-                                ? '<a href="?secao=usuario&id=' . $usuario['id'] . '">' . $usuario['nome'] . '</a>'
+                                ? '<a href="?secao=editar-usuario&id=' . $usuario['id'] . '">' . $usuario['nome'] . '</a>'
                                 : $usuario['nome']) .
                                 '</td>
                                     <td>' . $usuario['email'] . '</td>

@@ -7,28 +7,28 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Configurações</a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=tipos-orgaos">Tipos de órgãos</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=tipos-orgaos">Tipos de órgãos</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=tipos-pessoas">Tipos de pessoas</a>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=profissoes">Profissões</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=tipos-pessoas">Tipos de pessoas</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=profissoes">Profissões</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=tipos-documentos">Tipos de documentos</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=tipos-documentos">Tipos de documentos</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=postagens-status">Status das postagens</a>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=tipos-clipping">Tipos de clipping</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=postagens-status">Status das postagens</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=tipos-clipping">Tipos de clipping</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=emendas-status">Status de emenda</a>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=emendas-objetivos">Objetivos da emenda</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=emendas-status">Status de emenda</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=emendas-objetivos">Objetivos da emenda</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=tipos-agenda">Tipos de agenda</a>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=situacoes-agenda">Situações da agenda</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=tipos-agenda">Tipos de agenda</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=situacoes-agenda">Situações da agenda</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=proposicoes-temas">Temas de proposições</a>
-                        <a class="dropdown-item dropdown-item-custom" href="?secao=proposicoes_tramitacoes">Tramitações de proposições</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=proposicoes-temas">Temas de proposições</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=proposicoes_tramitacoes">Tramitações de proposições</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?secao=meu-gabinete">Meu gabinete</a>
+                    <a class="nav-link link_loading" href="?secao=meu-gabinete">Meu gabinete</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $_SESSION['nome'] ?></a>

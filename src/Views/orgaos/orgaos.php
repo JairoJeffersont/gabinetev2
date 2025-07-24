@@ -46,13 +46,22 @@ $filtros['gabinete'] = $_SESSION['gabinete'];
         <div class="container-fluid p-2">
             <div class="card mb-2 ">
                 <div class="card-body p-1">
-                    <a class="btn btn-primary custom-card-body btn-sm" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
+                    <a class="btn btn-primary custom-card-body btn-sm link_loading" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
                 </div>
             </div>
             <div class="card mb-2">
                 <div class="card-header bg-primary text-white px-2 py-1 custom-card-header"><i class="bi bi-building"></i> Órgãos e Entidades</div>
                 <div class="card-body custom-card-body p-2">
                     <p class="card-text mb-0">Nesta seção, é possível gerenciar órgãos ou entidades, garantindo a organização correta dessas informações no sistema.</p>
+                </div>
+            </div>
+            <div class="card mb-2">
+                <div class="card-body custom-card-body p-1">
+                    <form class="row g-2 form_custom mb-0" method="post" enctype="application/x-www-form-urlencoded">
+                        <div class="col-md-12 col-12">                            
+                            <a href="?secao=orgaos-imprimir" type="button" target="_blank" class="btn btn-secondary btn-sm""><i class="bi bi-printer-fill"></i> Imprimir</a>                            
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="card mb-2">

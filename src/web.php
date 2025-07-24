@@ -8,6 +8,7 @@ $rotas = [
     'recuperar-senha' => '../src/Views/login/recuperar-senha.php',
     'nova-senha' => '../src/Views/login/nova-senha.php',
     'novo-usuario' => '../src/Views/login/novo-usuario.php',
+    'editar-usuario' => '../src/Views/meu-gabinete/editar-usuario.php',
     'meu-gabinete' => '../src/Views/meu-gabinete/index.php',
     'cadastro' => '../src/Views/login/cadastro.php',
     'home' => '../src/Views/home/home.php',
@@ -19,8 +20,11 @@ $rotas = [
     'tipo-pessoa' => '../src/Views/pessoas/tipo-pessoa.php',
     'pessoas' => '../src/Views/pessoas/pessoas.php',
     'pessoa' => '../src/Views/pessoas/pessoa.php',
-    'pessoas-relatorios' => '../src/Views/pessoas/pessoas-relatorio.php',
-    'imprimir-relatorio' => '../src/Views/pessoas/imprimir-relatorio.php'
+    'tipos-documentos' => '../src/Views/documentos/tipos-documentos.php',
+    'tipo-documento' => '../src/Views/documentos/tipo-documento.php',
+    'documentos' => '../src/Views/documentos/documentos.php',
+    'documento' => '../src/Views/documentos/documento.php',
+
 ];
 
 if (array_key_exists($pagina, $rotas)) {
@@ -28,3 +32,4 @@ if (array_key_exists($pagina, $rotas)) {
 } else {
     include '../src/Views/errors/404.php';
 }
+

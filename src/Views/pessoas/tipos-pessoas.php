@@ -18,7 +18,7 @@ $usuarioController = new \App\Controllers\UsuarioController()
         <div class="container-fluid p-2">
             <div class="card mb-2 ">
                 <div class="card-body p-1">
-                    <a class="btn btn-primary custom-card-body btn-sm" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
+                    <a class="btn btn-primary custom-card-body btn-sm link_loading" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
                 </div>
             </div>
             <div class="card mb-2">

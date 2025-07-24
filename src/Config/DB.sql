@@ -153,3 +153,37 @@ CREATE TABLE
         FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
         FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE
+    tipo_documento (
+        id VARCHAR(36) PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL UNIQUE,
+        gabinete VARCHAR(36) NOT NULL,
+        criado_por VARCHAR(36) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+INSERT INTO tipo_documento (id, nome, gabinete, criado_por) VALUES
+    ('1', 'Sem tipo definido', '1', '1');
+
+CREATE TABLE
+    documento (
+        id VARCHAR(36) NOT NULL PRIMARY KEY,
+        nome VARCHAR(255) NOT NULL,
+        descricao TEXT DEFAULT NULL,
+        ano VARCHAR(4) DEFAULT NULL,
+        tipo_id VARCHAR(36) NOT NULL,
+        arquivo TEXT NOT NULL,
+        orgao VARCHAR(36) NOT NULL,
+        gabinete VARCHAR(36) NOT NULL,
+        criado_por VARCHAR(36) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (tipo_id) REFERENCES tipo_documento (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (orgao) REFERENCES orgao (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;

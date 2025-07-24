@@ -4,14 +4,14 @@ ob_start();
 
 include '../src/Views/includes/verificaLogado.php';
 
-$tipoOrgaoController = new \App\Controllers\OrgaoTipoController();
+$tipoDocumentoController = new \App\Controllers\TipoDocumentoController();
 
 $tipoget = (isset($_GET['tipo'])) ? $_GET['tipo'] : null;
 
-$buscaTipo = $tipoOrgaoController->buscar($tipoget);
+$buscaTipo = $tipoDocumentoController->buscar($tipoget);
 
 if ($buscaTipo['status'] != 'success') {
-    header('Location: ?secao=tipos-orgaos');
+    header('Location: ?secao=tipos-documentos');
 }
 
 ?>
@@ -26,11 +26,11 @@ if ($buscaTipo['status'] != 'success') {
             <div class="card mb-2 ">
                 <div class="card-body p-1">
                     <a class="btn btn-primary custom-card-body btn-sm link_loading" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
-                    <a class="btn btn-success custom-card-body btn-sm link_loading" href="?secao=tipos-orgaos" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
+                    <a class="btn btn-success custom-card-body btn-sm link_loading" href="?secao=tipos-documentos" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
                 </div>
             </div>
             <div class="card mb-2">
-                <div class="card-header bg-primary text-white px-2 py-1 custom-card-header"><i class="bi bi-building"></i> Editar tipo de Órgão/Entidade</div>
+                <div class="card-header bg-primary text-white px-2 py-1 custom-card-header"><i class="bi bi-file-earmark-text"></i> Editar tipo de documento</div>
                 <div class="card-body custom-card-body p-2">
 
                     <?php
@@ -38,13 +38,13 @@ if ($buscaTipo['status'] != 'success') {
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
 
                         $dados = [
-                            'nome' => $_POST['orgao_tipo_nome']
+                            'nome' => $_POST['documento_tipo_nome']
                         ];
 
-                        $result = $tipoOrgaoController->atualizar($tipoget, $dados);
+                        $result = $tipoDocumentoController->atualizar($tipoget, $dados);
 
                         if ($result['status'] == 'success') {
-                            $buscaTipo = $tipoOrgaoController->buscar($tipoget);
+                            $buscaTipo = $tipoDocumentoController->buscar($tipoget);
 
                             echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
                         } else if ($result['status'] == 'duplicated') {
@@ -55,10 +55,10 @@ if ($buscaTipo['status'] != 'success') {
                     }
 
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_apagar'])) {
-                        $result = $tipoOrgaoController->apagar($tipoget);
+                        $result = $tipoDocumentoController->apagar($tipoget);
 
                         if ($result['status'] == 'success') {
-                            header('Location: ?secao=tipos-orgaos');
+                            header('Location: ?secao=tipos-documentos');
                         } else if ($result['status'] == 'server_error' || $result['status'] == 'forbidden') {
                             echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
                         }
@@ -68,12 +68,10 @@ if ($buscaTipo['status'] != 'success') {
                         echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">Você não tem autorização para inserir ou editar tipos.</div>';
                     }
 
-
-
                     ?>
                     <form class="row g-2 form_custom" id="form_novo" method="POST">
                         <div class="col-md-2 col-12">
-                            <input type="text" class="form-control form-control-sm" name="orgao_tipo_nome" placeholder="Nome do Tipo" value="<?= $buscaTipo['data']['nome'] ?>" required>
+                            <input type="text" class="form-control form-control-sm" name="documento_tipo_nome" placeholder="Nome do Tipo" value="<?= $buscaTipo['data']['nome'] ?>" required>
                         </div>
                         <div class="col-md-3 col-12">
                             <?php
@@ -85,7 +83,6 @@ if ($buscaTipo['status'] != 'success') {
                                 echo '<button type="submit" class="btn btn-danger btn-sm confirm-action" disabled name="btn_apagar"><i class="bi bi-trash"></i> Apagar</button>';
                             }
                             ?>
-
                         </div>
                     </form>
                 </div>
