@@ -35,8 +35,8 @@ $buscaTipo = $tipoUsuarioController->listar();
 
             <div class="card mb-2 ">
                 <div class="card-body p-1">
-                    <a class="btn btn-primary btn-sm link_loading" href="?secao=meu-gabinete" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
-                    <a class="btn btn-success btn-sm link_loading" href="?secao=meu-gabinete" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
+                    <a class="btn btn-primary custom-card-body btn-sm link_loading" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
+                    <a class="btn btn-success custom-card-body btn-sm link_loading" href="?secao=meu-gabinete" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
                 </div>
             </div>
 
@@ -44,6 +44,14 @@ $buscaTipo = $tipoUsuarioController->listar();
                 <div class="card-header custom-card-header px-2 py-1"> <i class="bi bi-person-gear"></i> Editar usuário </div>
                 <div class="card-body custom-card-body p-2">
                     <p class="card-text">Nessa seção você pode mudar o tipo de usuário ou apagar ele.</p>
+                </div>
+            </div>
+            <div class="card card-perfil w-100 p-2 d-flex flex-row align-items-center mb-2 text-white">
+                <img src="public/<?= ($buscaUsuario['data']['foto']) ? $buscaUsuario['data']['foto'] : 'img/images.png' ?>" alt="Foto do usuário" class="foto-perfil me-3">
+                <div>
+                    <h5 class="mb-1"><?= $buscaUsuario['data']['nome'] ?></h5>
+                    <p class="mb-0"><?= ($buscaUsuario['data']['email']) ? $buscaUsuario['data']['email'] : 'Email não informado' ?></p>
+                    <p class="mb-0"><?= ($buscaUsuario['data']['telefone']) ? $buscaUsuario['data']['telefone'] : 'Whatsapp não informado' ?></p>
                 </div>
             </div>
             <div class="card mb-2">

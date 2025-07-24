@@ -13,7 +13,6 @@ $usuarioController = new UsuarioController();
 $gabineteSessao = $_SESSION['gabinete'];
 $usuarioSessao = $_SESSION['id'];
 
-
 $buscaGabinete = $gabineteController->buscar($gabineteSessao, 'id');
 $buscaUsuarios = $usuarioController->listar('nome', 'asc', 100, 1, ['gabinete' => $gabineteSessao]);
 $buscaTipo = $tipoGabineteController->buscar($buscaGabinete['data']['tipo'], 'id');
@@ -34,9 +33,9 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
 </div>
 
 <div class="card mb-2">
-    <div class="card-body custom-card-body p-2">
-        <h5 class="card-title mb-2"><?= $buscaGabinete['data']['nome'] ?> - <?= $buscaGabinete['data']['estado'] ?> | <?= $buscaTipo['data']['nome'] ?></h5>
-        <p class="card-text">Total de usuários no gabinete: <b><?= count($buscaUsuarios['data']) ?></b></p>
+    <div class="card-body  p-2">
+        <h5 class="card-title mb-0"><?= $buscaGabinete['data']['nome'] ?> - <?= $buscaGabinete['data']['estado'] ?></h5>
+        <p class="card-text text-muted"><?= $buscaTipo['data']['nome'] ?></p>
     </div>
 </div>
 
@@ -92,6 +91,14 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
         </form>
     </div>
 </div>
+<div class="card card-perfil w-100 p-2 d-flex flex-row align-items-center mb-2 text-white">
+    <img src="public/<?= ($buscaUsuario['data']['foto']) ? $buscaUsuario['data']['foto'] : 'img/images.png' ?>" alt="Foto do usuário" class="foto-perfil me-3">
+    <div>
+        <h5 class="mb-1"><?= $buscaUsuario['data']['nome'] ?></h5>
+        <p class="mb-0"><?= ($buscaUsuario['data']['email']) ? $buscaUsuario['data']['email'] : 'Email não informado' ?></p>
+        <p class="mb-0"><?= ($buscaUsuario['data']['telefone']) ? $buscaUsuario['data']['telefone'] : 'Whatsapp não informado' ?></p>
+    </div>
+</div>
 <div class="card mb-2">
     <div class="card-body custom-card-body p-2">
         <p class="card-text mb-2"><b>Meus dados</b></p>
@@ -114,8 +121,13 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
             $resultUsuarios = $usuarioController->atualizarUsuario($usuarioSessao, $dadosUsuario, 'id');
 
             if ($resultUsuarios['status'] == 'success') {
-                $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
-                echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="3">Usuário atualizado com sucesso!</div>';
+                echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="3">Usuário atualizado com sucesso. Aguarde...</div>';
+                echo '<script>
+                        setTimeout(function() {
+                            window.location.href = "?secao=meu-gabinete";
+                        }, 1000);
+                      </script>
+                                        ';
             }
         }
 

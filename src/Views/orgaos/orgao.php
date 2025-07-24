@@ -150,7 +150,7 @@ if ($buscaOrgao['status'] != 'success') {
 
             <div class="card mb-2 ">
                 <div class="card-body custom-card-body p-2">
-                    <h6 class="card-title mb-2 " style="font-size: 1.2em;"><i class="bi bi-file-earmark-text"></i> Documentos relacionados à este órgão</h6>
+                    <h6 class="card-title mb-2 " style="font-size: 1.2em;"><i class="bi bi-file-earmark-text"></i> <b>Documentos relacionados à este órgão</b></h6>
                     <div class="table-responsive">
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered mb-0">

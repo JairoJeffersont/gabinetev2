@@ -40,6 +40,14 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
     </div>
 </div>
 
+<div class="card card-perfil w-100 p-2 d-flex flex-row align-items-center mb-2 text-white">
+    <img src="public/<?= ($buscaUsuario['data']['foto']) ? $buscaUsuario['data']['foto'] : 'img/images.png' ?>" alt="Foto do usuário" class="foto-perfil me-3">
+    <div>
+        <h5 class="mb-1"><?= $buscaUsuario['data']['nome'] ?></h5>
+        <p class="mb-0"><?= ($buscaUsuario['data']['email']) ? $buscaUsuario['data']['email'] : 'Email não informado' ?></p>
+        <p class="mb-0"><?= ($buscaUsuario['data']['telefone']) ? $buscaUsuario['data']['telefone'] : 'Whatsapp não informado' ?></p>
+    </div>
+</div>
 
 <div class="card mb-2">
     <div class="card-body custom-card-body p-2">
@@ -47,7 +55,7 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
 
 
         <?php
-        
+
         if ($buscaUsuario['data']['aniversario'] == date('d/m')) {
             echo '<div class="alert alert-success custom-alert px-2 py-1 " role="alert">Feliz aniversário!</div>';
         }
@@ -70,8 +78,13 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
             $resultUsuarios = $usuarioController->atualizarUsuario($usuarioSessao, $dadosUsuario, 'id');
 
             if ($resultUsuarios['status'] == 'success') {
-                $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
-                echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="3">Usuário atualizado com sucesso!</div>';
+                echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="3">Usuário atualizado com sucesso. Aguarde...</div>';
+                echo '<script>
+                        setTimeout(function() {
+                            window.location.href = "?secao=meu-gabinete";
+                        }, 1000);
+                      </script>
+                                        ';
             }
         }
         ?>
