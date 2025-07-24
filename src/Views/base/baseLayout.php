@@ -45,9 +45,7 @@ $dotenv->load();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center mb-0">
-                    <div class="spinner-border mb-2" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
+                    <img src="public/img/loading.gif"/ class="img-fluid">
                     <p class="mb-0">Aguarde, processando...</p>
                 </div>
             </div>
