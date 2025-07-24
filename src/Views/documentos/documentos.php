@@ -63,13 +63,14 @@ $termoGet = $_GET['termo'] ?? null;
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
 
                         $result = $documentoController->novoDocumento($dados);
+                      
 
                         if ($result['status'] == 'success') {
                             echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
                         } else if ($result['status'] == 'duplicated') {
                             echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="4">' . $result['message'] . '</div>';
-                        } else if ($result['status'] == 'format_not_allowed' || $result['status'] == 'max_file_size_exceeded') {
-                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="4">Tipo de arquivo não permitido ou arquivo muito grande</div>';
+                        } else if ($result['status'] == 'format_not_allowed' || $result['status'] == 'max_file_size_exceeded' || $result['status'] == 'file_already_exists') {
+                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="4">Tipo de arquivo não permitido, arquivo muito grande ou arquivo já existe</div>';
                         } else if ($result['status'] == 'server_error') {
                             echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . ' - ' . $result['error_id'] . '</div>';
                         }

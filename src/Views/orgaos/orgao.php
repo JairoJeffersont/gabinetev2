@@ -8,6 +8,8 @@ $tipoOrgaoController = new \App\Controllers\OrgaoTipoController();
 $usuarioController = new \App\Controllers\UsuarioController();
 $orgaoController = new \App\Controllers\OrgaoController();
 $gabineteController = new \App\Controllers\GabineteController();
+$documentoController = new \App\Controllers\DocumentoController();
+$tipoDocumentoController = new \App\Controllers\TipoDocumentoController();
 
 $estadogabinete = $gabineteController->buscar($_SESSION['gabinete'])['data']['estado'];
 
@@ -73,7 +75,7 @@ if ($buscaOrgao['status'] != 'success') {
                         }
                     }
 
-                   
+
                     ?>
 
 
@@ -145,6 +147,46 @@ if ($buscaOrgao['status'] != 'success') {
                     </form>
                 </div>
             </div>
+
+            <div class="card mb-2 ">
+                <div class="card-body custom-card-body p-2">
+                    <h6 class="card-title mb-2 " style="font-size: 1.2em;"><i class="bi bi-file-earmark-text"></i> Documentos relacionados à este órgão</h6>
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped table-bordered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ano</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col" style="white-space: nowrap;">Criado em | por</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $buscaDocumentos = $documentoController->listar('nome', 'desc', 1000, 1, ['orgao' => $orgaoGet]);
+                                    if ($buscaDocumentos['status'] == 'success') {
+                                        foreach ($buscaDocumentos['data'] as $documento) {
+                                            $usuario = $usuarioController->buscar($documento['criado_por'])['data']['nome'];
+                                            $tipo = $tipoDocumentoController->buscar($documento['tipo_id'])['data']['nome'];
+                                            echo '<tr>';
+                                            echo '<td><a href="?secao=documento&id=' . $documento['id'] . '" class="link_loading">' . $documento['ano'] . '</a></td>';
+                                            echo '<td>' . $documento['nome'] . '</td>';
+                                            echo '<td>' . $tipo . '</td>';
+                                            echo '<td>' . date('d/m H:i', strtotime($documento['criado_em'])) . ' | ' . ($usuario ?? '') . '</td>';
+                                            echo '</tr>';
+                                        }
+                                    } else if ($buscaDocumentos['status'] == 'empty') {
+                                        echo '<tr><td colspan="4">Nenhum documento encontrado</td></tr>';
+                                    }
+
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>            
         </div>
     </div>
 </div>
