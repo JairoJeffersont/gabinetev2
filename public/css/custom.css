@@ -6,16 +6,20 @@ a {
 }
 
 body {
-
+    -webkit-font-smoothing: antialiased; /* Chrome, Safari */
+    -moz-osx-font-smoothing: grayscale;  /* Firefox (macOS) */
+    
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 13px;
+
     background-image: url('../img/main_background.jpg');
     background-repeat: repeat;
     background-size: cover;
-    background-color: rgb(255, 255, 255);
+    background-color: #fff; /* mais simples */
 }
+
 
 .custom-alert {
     font-weight: 600;
@@ -78,7 +82,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    
+
     /* sombra preta com opacidade */
     z-index: 0;
 }
@@ -97,6 +101,6 @@ body {
     border: 2px solid #fff;
 }
 
-.accordion-button{
+.accordion-button {
     font-size: 14px !important;
 }

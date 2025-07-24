@@ -54,7 +54,7 @@ $filtros['gabinete'] = $_SESSION['gabinete'];
                 <div class="card-body custom-card-body p-2">
                     <p class="card-text mb-0">Nesta seção, é possível gerenciar órgãos ou entidades, garantindo a organização correta dessas informações no sistema.</p>
                 </div>
-            </div>            
+            </div>
             <div class="card mb-2">
                 <div class="card-body custom-card-body p-2">
 
@@ -157,9 +157,9 @@ $filtros['gabinete'] = $_SESSION['gabinete'];
                     </form>
                 </div>
             </div>
-            
+
             <div class="card mb-2 ">
-                <div class="card-body custom-card-body p-1">
+                <div class="card-body custom-card-body p-2">
                     <form class="row g-2 form_custom mb-0" action="" method="GET" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" name="secao" value="orgaos" />
 
@@ -223,7 +223,7 @@ $filtros['gabinete'] = $_SESSION['gabinete'];
                 </div>
             </div>
             <div class="card mb-2 ">
-                <div class="card-body custom-card-body p-1">
+                <div class="card-body custom-card-body p-2">
                     <div class="table-responsive">
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered mb-0">
@@ -302,6 +302,7 @@ $filtros['gabinete'] = $_SESSION['gabinete'];
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>

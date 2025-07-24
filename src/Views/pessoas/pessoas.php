@@ -229,7 +229,7 @@ if ($termo !== '') {
                 </div>
             </div>
             <div class="card mb-2 ">
-                <div class="card-body custom-card-body p-1">
+                <div class="card-body custom-card-body p-2">
                     <form class="row g-2 form_custom mb-0" action="" method="GET" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" name="secao" value="pessoas" />
 
@@ -303,7 +303,7 @@ if ($termo !== '') {
                 </div>
             </div>
             <div class="card mb-2 ">
-                <div class="card-body custom-card-body p-1">
+                <div class="card-body custom-card-body p-2">
                     <div class="table-responsive">
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered mb-0">
