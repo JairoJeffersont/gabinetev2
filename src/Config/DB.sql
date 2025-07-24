@@ -86,7 +86,7 @@ CREATE TABLE
         nome VARCHAR(255) NOT NULL UNIQUE,
         email VARCHAR(255) DEFAULT NULL,
         telefone VARCHAR(255) DEFAULT NULL,
-        endereco TEXT,
+        endereco TEXT DEFAULT NULL,
         municipio VARCHAR(255) NOT NULL,
         estado VARCHAR(255) NOT NULL,
         cep VARCHAR(255) DEFAULT NULL,

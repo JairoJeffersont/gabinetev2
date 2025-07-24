@@ -60,16 +60,7 @@ if ($termo !== '') {
                     <p class="card-text mb-2">Nesta seção, é possível adicionar e editar pessoas de interesse do mandato, garantindo a organização correta dessas informações no sistema.</p>
                     <p class="card-text mb-0">Os campos <b>nome</b>, <b>estado</b>, <b>município</b> e <b>importancia</b> são obrigatórios. A foto deve ser em <b>JPG</b> ou <b>PNG</b> e ter no máximo <b>5MB</b></p>
                 </div>
-            </div>
-            <div class="card mb-2">
-                <div class="card-body custom-card-body p-1">
-                    <form class="row g-2 form_custom mb-0" method="post" enctype="application/x-www-form-urlencoded">
-                        <div class="col-md-12 col-12">                            
-                            <a href="?secao=pessoas-imprimir" type="button" target="_blank" class="btn btn-secondary btn-sm""><i class="bi bi-printer-fill"></i> Imprimir</a>                            
-                        </div>
-                    </form>
-                </div>
-            </div>
+            </div>            
             <div class="card mb-2">
                 <div class="card-body custom-card-body p-2">
 
