@@ -94,7 +94,7 @@ $usuarioController = new \App\Controllers\UsuarioController();
                             </thead>
                             <tbody>
                                 <?php
-                                $lista = $situacaoEmendaController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
+                                $lista = $situacaoEmendaController->listar('nome', 'asc', 1000, 1, ['gabinete' => $_SESSION['gabinete']]);
 
                                 if ($lista['status'] == 'success') {
                                     foreach ($lista['data'] as $item) {
