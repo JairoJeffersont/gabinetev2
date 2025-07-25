@@ -187,3 +187,79 @@ CREATE TABLE
         FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
         FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE
+    situacao_emendas(
+        id VARCHAR(36) NOT NULL PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL UNIQUE,
+        descricao TEXT DEFAULT NULL,
+        gabinete VARCHAR(36) NOT NULL,
+        criado_por VARCHAR(36) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+INSERT INTO situacao_emendas (id, nome, descricao, gabinete, criado_por) VALUES
+    ('1', 'Criada', 'Emenda inserida no sistema', '1', '1'),
+    ('2', 'Em Análise', 'Emenda em processo de avaliação técnica ou jurídica', '1', '1'),
+    ('3', 'Aprovada', 'Emenda aprovada pelo gabinete ou órgão responsável', '1', '1'),
+    ('4', 'Rejeitada', 'Emenda recusada após análise', '1', '1'),
+    ('5', 'Em Execução', 'Emenda aprovada e em fase de execução', '1', '1'),
+    ('6', 'Concluída', 'Emenda finalizada e recursos aplicados', '1', '1'),
+    ('7', 'Cancelada', 'Emenda cancelada antes da execução', '1', '1'),
+    ('8', 'Pendente de Documentação', 'Emenda aguardando envio de documentação obrigatória', '1', '1'),
+    ('9', 'Aguardando Aprovação', 'Emenda criada mas ainda não aprovada', '1', '1'),
+    ('10', 'Suspensa', 'Emenda temporariamente suspensa por decisão administrativa', '1', '1');
+
+CREATE TABLE
+    objetivo_emenda(
+        id VARCHAR(36) NOT NULL PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL UNIQUE,
+        descricao TEXT DEFAULT NULL,
+        gabinete VARCHAR(36) NOT NULL,
+        criado_por VARCHAR(36) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT          
+    )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+INSERT INTO objetivo_emenda (id, nome, descricao, gabinete, criado_por) VALUES
+    ('1', 'Saúde', 'Emenda destinada à área de saúde', '1', '1'),
+    ('2', 'Educação', 'Emenda destinada à área de educação', '1', '1'),
+    ('3', 'Infraestrutura', 'Emenda destinada à infraestrutura', '1', '1'),
+    ('4', 'Esporte', 'Emenda destinada à promoção de atividades esportivas e lazer', '1', '1'),
+    ('5', 'Cultura', 'Emenda para incentivo a projetos culturais e artísticos', '1', '1'),
+    ('6', 'Segurança Pública', 'Emenda voltada para melhorias na segurança pública', '1', '1'),
+    ('7', 'Assistência Social', 'Emenda para ações sociais e de assistência à população vulnerável', '1', '1'),
+    ('8', 'Meio Ambiente', 'Emenda para preservação e recuperação ambiental', '1', '1'),
+    ('9', 'Habitação', 'Emenda para construção e melhoria de moradias populares', '1', '1'),
+    ('10', 'Transporte', 'Emenda voltada à melhoria do transporte público e infraestrutura viária', '1', '1'),
+    ('11', 'Turismo', 'Emenda para desenvolvimento do setor turístico e eventos locais', '1', '1'),
+    ('12', 'Agricultura', 'Emenda para apoio à agricultura familiar e produção rural', '1', '1'),
+    ('13', 'Tecnologia', 'Emenda para projetos de inovação e inclusão digital', '1', '1');
+
+CREATE TABLE
+    emenda (
+        id VARCHAR(36) NOT NULL PRIMARY KEY,
+        numero VARCHAR(255) NOT NULL,        
+        ano VARCHAR(4) DEFAULT NULL,
+        valor DECIMAL(15,2) NOT NULL,
+        situacao_id VARCHAR(36) NOT NULL,
+        objetivo_id VARCHAR(36) NOT NULL,
+        tipo ENUM('Parlamentar', 'Bancada', 'Extra') DEFAULT 'Parlamentar',
+        objeto TEXT DEFAULT NULL,
+        informacoes TEXT DEFAULT NULL,
+        estado VARCHAR(2) NOT NULL,
+        municipio VARCHAR(100) DEFAULT NULL,
+        gabinete VARCHAR(36) NOT NULL,
+        criado_por VARCHAR(36) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (situacao_id) REFERENCES situacao_emendas (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (objetivo_id) REFERENCES objetivo_emenda (id) ON DELETE RESTRICT ON UPDATE RESTRICT,        
+        FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;

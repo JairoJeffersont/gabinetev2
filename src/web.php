@@ -23,7 +23,10 @@ $rotas = [
     'tipos-documentos' => '../src/Views/documentos/tipos-documentos.php',
     'tipo-documento' => '../src/Views/documentos/tipo-documento.php',
     'documentos' => '../src/Views/documentos/documentos.php',
-    'documento' => '../src/Views/documentos/documento.php',
+    'emendas-status' => '../src/Views/emendas/situacaos_emenda.php',
+    'emendas-objetivos' => '../src/Views/emendas/objetivos_emenda.php',
+    'emenda-status' => '../src/Views/emendas/situacao_emenda.php',
+    'emenda-objetivo' => '../src/Views/emendas/objetivo_emenda.php',
 
 ];
 

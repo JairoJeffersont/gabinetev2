@@ -17,7 +17,7 @@
                         <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=postagens-status">Status das postagens</a>
                         <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=tipos-clipping">Tipos de clipping</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=emendas-status">Status de emenda</a>
+                        <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=emendas-status">Situações de emenda</a>
                         <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=emendas-objetivos">Objetivos da emenda</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item dropdown-item-custom link_loading" href="?secao=tipos-agenda">Tipos de agenda</a>
