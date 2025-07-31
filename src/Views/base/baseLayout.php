@@ -35,8 +35,8 @@ $dotenv->load();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <script src="https://cdn.tiny.cloud/1/9ebpappotq2edw5qf3ik3e6m9owenjuy9buc8ddrbngfw88f/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
+    
+    <script src="public/vendor/tinymce/tinymce.min.js"></script>
 
 
 </head>
