@@ -149,8 +149,28 @@ if ($buscaDocumento['status'] != 'success') {
                         <div class="col-md-3 col-12">
                             <input type="file" class="form-control form-control-sm" name="arquivo" />
                         </div>
+                        <style>
+                            .tox {
+                                font-size: 12px !important;
+                            }
+                        </style>
+                        <script>
+                            tinymce.init({
+                                selector: '#descricao',
+                                language: 'pt_BR',
+                                license_key: 'gpl',
+                                language_url: 'public/vendor/tinymce/langs/pt_BR.js',
+                                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                                setup: function(editor) {
+                                    editor.on('change', function() {
+                                        tinymce.triggerSave();
+                                    });
+                                }
+                            });
+                        </script>
                         <div class="col-md-12 col-12">
-                            <textarea class="form-control form-control-sm" name="descricao" rows="10" placeholder="Resumo do documento" required><?php echo $buscaDocumento['data']['descricao'] ?></textarea>
+                            <textarea class="form-control form-control-sm" name="descricao" id="descricao" rows="2" placeholder="Resumo do documento" required><?php echo $buscaDocumento['data']['descricao'] ?></textarea>
                         </div>
                         <div class="col-md-6 col-12">
                             <?php
@@ -181,6 +201,12 @@ if ($buscaDocumento['status'] != 'success') {
                 case 'pdf':
                     $icone = 'bi-file-earmark-pdf';
                     $corIcone = 'text-danger';
+                    break;
+                case 'png':
+                case 'jpeg':
+                case 'jpg':
+                    $icone = 'bi bi-file-earmark-image';
+                    $corIcone = 'text-secondary';
                     break;
                 case 'doc':
                 case 'docx':
@@ -215,7 +241,7 @@ if ($buscaDocumento['status'] != 'success') {
             <div class="card mb-2 ">
                 <div class="card-body custom-card-body p-1">
                     <div class="d-flex gap-2 flex-wrap">
-                        <?php if ($extensao === 'pdf'): ?>
+                        <?php if ($extensao === 'pdf' || $extensao === 'png' || $extensao === 'jpg' || $extensao === 'jpeg'): ?>
                             <a href="public/<?php echo htmlspecialchars($arquivo); ?>" target="_blank" style="font-size: 1.0em;" class="btn btn-secondary btn-sm">
                                 <i class="bi bi-eye"></i> Visualizar
                             </a>

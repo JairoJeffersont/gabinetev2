@@ -84,7 +84,7 @@ $termoGet = $_GET['termo'] ?? null;
                             <input type="text" class="form-control form-control-sm" name="ano" value="<?php echo date('Y') ?>" data-mask=0000 required>
                         </div>
                         <div class="col-md-3 col-10">
-                            <input type="text" class="form-control form-control-sm" name="nome" placeholder="Nome do documento. (ex. 25/2025..)" required>
+                            <input type="text" class="form-control form-control-sm" name="nome" placeholder="Nome do documento. (ex. Oficio 25/2025, Carta...)" required>
                         </div>
 
                         <div class="col-md-2 col-12">
@@ -132,8 +132,9 @@ $termoGet = $_GET['termo'] ?? null;
                         <div class="col-md-3 col-12">
                             <input type="file" class="form-control form-control-sm" name="arquivo" required />
                         </div>
+                        
                         <div class="col-md-12 col-12">
-                            <textarea class="form-control form-control-sm" name="descricao" rows="10" placeholder="Resumo do documento" required></textarea>
+                            <textarea class="form-control form-control-sm" name="descricao" id="descricao" rows="2" placeholder="Resumo do documento" required></textarea>
                         </div>
                         <div class="col-md-1 col-12">
                             <?php
@@ -224,10 +225,10 @@ $termoGet = $_GET['termo'] ?? null;
 
                                             echo '<tr>';
                                             echo '<td style="white-space: nowrap;"><a class="link_loading" href="?secao=documento&id=' . $documento['id'] . '">' . htmlspecialchars($documento['nome'] ?? '') . '</a></td>';
-                                            echo '<td>' . ($buscaTipo ?? '') . '</td>';
-                                            echo '<td>' . $documento['descricao'] . '</td>';
-                                            echo '<td>' . ($buscaOrgao ?? '') . '</td>';
-                                            echo '<td>' . date('d/m H:i', strtotime($documento['criado_em'])) . ' | ' . ($usuario ?? '') . '</td>';
+                                            echo '<td style="white-space: nowrap;">' . ($buscaTipo ?? '') . '</td>';
+                                            echo '<td style="white-space: nowrap;">' . $documento['descricao'] . '</td>';
+                                            echo '<td style="white-space: nowrap;">' . ($buscaOrgao ?? '') . '</td>';
+                                            echo '<td style="white-space: nowrap;">' . date('d/m H:i', strtotime($documento['criado_em'])) . ' | ' . ($usuario ?? '') . '</td>';
                                             echo '</tr>';
                                         }
                                     } else if ($buscaDocumentos['status'] == 'empty') {
