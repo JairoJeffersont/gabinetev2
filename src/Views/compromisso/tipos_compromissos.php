@@ -4,7 +4,7 @@ ob_start();
 
 include '../src/Views/includes/verificaLogado.php';
 
-$tipoOrgaoController = new \App\Controllers\OrgaoTipoController();
+$tipoCompromissoController = new \App\Controllers\TipoCompromissoController();
 $usuarioController = new \App\Controllers\UsuarioController()
 
 ?>
@@ -22,11 +22,16 @@ $usuarioController = new \App\Controllers\UsuarioController()
                 </div>
             </div>
             <div class="card mb-2">
-                <div class="card-header bg-primary text-white px-2 py-1 custom-card-header"><i class="bi bi-building"></i> Adicionar tipo de Órgão/Entidade</div>
+                <div class="card-header bg-primary text-white px-2 py-1 custom-card-header">
+                    <i class="bi bi-calendar"></i> Gerenciar tipos de compromissos
+                </div>
                 <div class="card-body custom-card-body p-2">
-                    <p class="card-text mb-0">Nesta seção, é possível adicionar e editar os tipos de órgãos e entidades, garantindo a organização correta dessas informações no sistema.</p>
+                    <p class="card-text mb-0">
+                        Nesta seção, é possível gerenciar os tipos de compromissos do sistema, garantindo a organização correta dessas informações.
+                    </p>
                 </div>
             </div>
+
             <div class="card shadow-sm mb-2">
                 <div class="card-body custom-card-body p-2">
 
@@ -35,12 +40,12 @@ $usuarioController = new \App\Controllers\UsuarioController()
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
 
                         $dados = [
-                            'nome' => $_POST['orgao_tipo_nome'],
+                            'nome' => $_POST['compromisso_tipo_nome'],
                             'gabinete' => $_SESSION['gabinete'],
                             'criado_por' => $_SESSION['id']
                         ];
 
-                        $result = $tipoOrgaoController->inserir($dados);
+                        $result = $tipoCompromissoController->inserir($dados);
 
                         if ($result['status'] == 'success') {
                             echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
@@ -58,7 +63,7 @@ $usuarioController = new \App\Controllers\UsuarioController()
                     ?>
                     <form class="row g-2 form_custom" id="form_novo" method="POST">
                         <div class="col-md-2 col-12">
-                            <input type="text" class="form-control form-control-sm" name="orgao_tipo_nome" placeholder="Nome do Tipo">
+                            <input type="text" class="form-control form-control-sm" name="compromisso_tipo_nome" placeholder="Nome do Tipo">
                         </div>
                         <div class="col-md-5 col-12">
                             <?php
@@ -85,13 +90,13 @@ $usuarioController = new \App\Controllers\UsuarioController()
                             </thead>
                             <tbody>
                                 <?php
-                                $buscaTipos = $tipoOrgaoController->listar('nome', 'asc', 1000, 1, ['gabinete' =>  [$_SESSION['gabinete'], '1']]);
+                                $buscaTipos = $tipoCompromissoController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
 
                                 if ($buscaTipos['status'] == 'success') {
                                     foreach ($buscaTipos['data'] as $tipos) {
                                         $usuario = $usuarioController->buscar($tipos['criado_por'])['data']['nome'];
                                         echo '<tr>
-                                                <td><a href="?secao=tipo-orgao&tipo=' . $tipos['id'] . '">' . $tipos['nome'] . '</a></td>
+                                                <td><a href="?secao=tipo-compromisso&tipo=' . $tipos['id'] . '">' . $tipos['nome'] . '</a></td>
                                                 <td>' . $usuario . ' | ' . date('d/m', strtotime($tipos['criado_em'])) . '</td>
 
                                               </tr>';

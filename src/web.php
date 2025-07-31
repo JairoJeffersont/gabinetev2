@@ -29,6 +29,8 @@ $rotas = [
     'emenda-objetivo' => '../src/Views/emendas/objetivo_emenda.php',
     'emendas' => '../src/Views/emendas/emendas.php',
     'emenda' => '../src/Views/emendas/emenda.php',
+    'tipos-compromissos' => '../src/Views/compromisso/tipos_compromissos.php',
+    'tipo-compromisso' => '../src/Views/compromisso/tipo_compromisso.php',
 
 ];
 

@@ -55,12 +55,15 @@ if ($buscaTipo['status'] != 'success') {
                     }
 
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_apagar'])) {
-                        $result = $tipoPessoaController->apagar($tipoget);
-
-                        if ($result['status'] == 'success') {
-                            header('Location: ?secao=tipos-orgaos');
-                        } else if ($result['status'] == 'server_error' || $result['status'] == 'forbidden') {
-                            echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
+                        if ($buscaTipo['data']['gabinete'] == '1') {
+                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">Você não pode apagar um item padrão do sistema.</div>';
+                        } else {
+                            $result = $tipoPessoaController->apagar($tipoget);
+                            if ($result['status'] == 'success') {
+                                header('Location: ?secao=tipos-pessoas');
+                            } else if ($result['status'] == 'server_error' || $result['status'] == 'forbidden') {
+                                echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
+                            }
                         }
                     }
 

@@ -276,3 +276,63 @@ CREATE TABLE
         FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+
+CREATE TABLE 
+    tipo_compromisso(
+        id VARCHAR(36) NOT NULL PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL UNIQUE,
+        gabinete VARCHAR(36) NOT NULL,
+        criado_por VARCHAR(36) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+INSERT INTO tipo_compromisso (id, nome, gabinete, criado_por) VALUES
+    ('1', 'Sem tipo definido', '1', '1'),
+    ('2', 'Reunião', '1', '1'),
+    ('3', 'Audiência Pública', '1', '1'),
+    ('4', 'Evento Oficial', '1', '1'),
+    ('5', 'Visita Oficial', '1', '1');
+
+CREATE TABLE 
+    situacao_compromisso(
+        id VARCHAR(36) NOT NULL PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL UNIQUE,
+        descricao TEXT DEFAULT NULL,
+        gabinete VARCHAR(36) NOT NULL,
+        criado_por VARCHAR(36) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+INSERT INTO situacao_compromisso (id, nome, descricao, gabinete, criado_por) VALUES
+    ('1', 'Pendente', 'Compromisso pendente de confirmação', '1', '1'),
+    ('2', 'Confirmado', 'Compromisso confirmado', '1', '1'),
+    ('3', 'Cancelado', 'Compromisso cancelado', '1', '1'),
+    ('4', 'Concluído', 'Compromisso concluído com sucesso', '1', '1');
+
+CREATE TABLE 
+    compromisso (
+        id VARCHAR(36) NOT NULL PRIMARY KEY,
+        titulo VARCHAR(255) NOT NULL,
+        descricao TEXT DEFAULT NULL,
+        data_hora DATETIME NOT NULL,
+        endereco TEXT DEFAULT NULL,
+        estado VARCHAR(2) NOT NULL,
+        municipio TEXT DEFAULT NULL,
+        tipo_id VARCHAR(36) NOT NULL,
+        situacao_id VARCHAR(36) NOT NULL,
+        gabinete VARCHAR(36) NOT NULL,
+        criado_por VARCHAR(36) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (tipo_id) REFERENCES tipo_compromisso (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (situacao_id) REFERENCES situacao_compromisso (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+        FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+

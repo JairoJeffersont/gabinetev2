@@ -4,15 +4,16 @@ ob_start();
 
 include '../src/Views/includes/verificaLogado.php';
 
-$tipoOrgaoController = new \App\Controllers\OrgaoTipoController();
+$tipoCompromissoController = new \App\Controllers\TipoCompromissoController();
 
 $tipoget = (isset($_GET['tipo'])) ? $_GET['tipo'] : null;
 
-$buscaTipo = $tipoOrgaoController->buscar($tipoget);
+$buscaTipo = $tipoCompromissoController->buscar($tipoget);
 
 if ($buscaTipo['status'] != 'success') {
-    header('Location: ?secao=tipos-orgaos');
+    header('Location: ?secao=tipos-compromissos');
 }
+
 
 ?>
 
@@ -26,11 +27,20 @@ if ($buscaTipo['status'] != 'success') {
             <div class="card mb-2 ">
                 <div class="card-body p-1">
                     <a class="btn btn-primary custom-card-body btn-sm link_loading" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
-                    <a class="btn btn-success custom-card-body btn-sm link_loading" href="?secao=tipos-orgaos" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
                 </div>
             </div>
             <div class="card mb-2">
-                <div class="card-header bg-primary text-white px-2 py-1 custom-card-header"><i class="bi bi-building"></i> Editar tipo de Órgão/Entidade</div>
+                <div class="card-header bg-primary text-white px-2 py-1 custom-card-header">
+                    <i class="bi bi-calendar"></i> Gerenciar tipos de compromissos
+                </div>
+                <div class="card-body custom-card-body p-2">
+                    <p class="card-text mb-0">
+                        Nesta seção, é possível gerenciar os tipos de compromissos do sistema, garantindo a organização correta dessas informações.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-2">
                 <div class="card-body custom-card-body p-2">
 
                     <?php
@@ -38,19 +48,19 @@ if ($buscaTipo['status'] != 'success') {
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
 
                         $dados = [
-                            'nome' => $_POST['orgao_tipo_nome']
+                            'nome' => $_POST['compromisso_tipo_nome']
                         ];
 
-                        $result = $tipoOrgaoController->atualizar($tipoget, $dados);
+                        $result = $tipoCompromissoController->atualizar($tipoget, $dados);
 
                         if ($result['status'] == 'success') {
-                            $buscaTipo = $tipoOrgaoController->buscar($tipoget);
+                            $buscaTipo = $tipoCompromissoController->buscar($tipoget);
 
                             echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
                         } else if ($result['status'] == 'duplicated') {
                             echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
                         } else if ($result['status'] == 'server_error') {
-                            echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
+                            echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . ' - ' . $result['error_id'] . '</div>';
                         }
                     }
 
@@ -58,9 +68,9 @@ if ($buscaTipo['status'] != 'success') {
                         if ($buscaTipo['data']['gabinete'] == '1') {
                             echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">Você não pode apagar um item padrão do sistema.</div>';
                         } else {
-                            $result = $tipoOrgaoController->apagar($tipoget);
+                            $result = $tipoCompromissoController->apagar($tipoget);
                             if ($result['status'] == 'success') {
-                                header('Location: ?secao=tipos-orgaos');
+                                header('Location: ?secao=tipos-compromissos');
                             } else if ($result['status'] == 'server_error' || $result['status'] == 'forbidden') {
                                 echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
                             }
@@ -71,12 +81,10 @@ if ($buscaTipo['status'] != 'success') {
                         echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">Você não tem autorização para inserir ou editar tipos.</div>';
                     }
 
-
-
                     ?>
                     <form class="row g-2 form_custom" id="form_novo" method="POST">
                         <div class="col-md-2 col-12">
-                            <input type="text" class="form-control form-control-sm" name="orgao_tipo_nome" placeholder="Nome do Tipo" value="<?= $buscaTipo['data']['nome'] ?>" required>
+                            <input type="text" class="form-control form-control-sm" name="compromisso_tipo_nome" value="<?php echo $buscaTipo['data']['nome']; ?>" placeholder="Nome do Tipo">
                         </div>
                         <div class="col-md-3 col-12">
                             <?php

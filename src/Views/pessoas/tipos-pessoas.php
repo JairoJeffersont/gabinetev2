@@ -85,7 +85,7 @@ $usuarioController = new \App\Controllers\UsuarioController()
                             </thead>
                             <tbody>
                                 <?php
-                                $buscaTipos = $tipoPessoaController->listar('nome', 'asc', 1000, 1, ['gabinete' => $_SESSION['gabinete']]);
+                                $buscaTipos = $tipoPessoaController->listar('nome', 'asc', 1000, 1, ['gabinete' =>  [$_SESSION['gabinete'], '1']]);
 
                                 if ($buscaTipos['status'] == 'success') {
                                     foreach ($buscaTipos['data'] as $tipos) {
