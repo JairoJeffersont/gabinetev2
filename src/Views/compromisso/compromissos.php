@@ -17,6 +17,12 @@ $tipoGet = isset($_GET['tipo']) ? $_GET['tipo'] : '0';
 $situacaoGet = isset($_GET['situacao']) ? $_GET['situacao'] : '0';
 $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
 
+$dias = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+
+$indiceDia = date('w', strtotime($data));
+
+$diaSemana = $dias[$indiceDia];
+
 ?>
 
 <div class="d-flex" id="wrapper">
@@ -43,7 +49,7 @@ $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
                 </div>
             </div>
 
-            <div class="card shadow-sm mb-2">
+            <div class="card mb-2">
                 <div class="card-body custom-card-body p-2">
 
                     <?php
@@ -59,8 +65,7 @@ $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
                             if (count($partesData) >= 2) {
                                 $dia = str_pad($partesData[0], 2, '0', STR_PAD_LEFT);
                                 $mes = str_pad($partesData[1], 2, '0', STR_PAD_LEFT);
-                                $ano = count($partesData) === 3 ? $partesData[2] : date('Y'); // Se não tiver ano, usa o atual
-
+                                $ano = count($partesData) === 3 ? $partesData[2] : date('Y');
                                 $dataFormatada = $ano . '-' . $mes . '-' . $dia;
                             }
                         }
@@ -69,7 +74,6 @@ $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
 
                         $data_hora = $dataFormatada . ' ' . $horaFormatada;
 
-                        // Monta o array final
                         $dadosForm = [
                             'data_hora'   => $data_hora,
                             'titulo'      => $_POST['titulo'] ?? '',
@@ -106,7 +110,7 @@ $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
                             <input type="text" class="form-control form-control-sm" name="titulo" placeholder="Titulo" required>
                         </div>
                         <div class="col-md-7 col-12">
-                            <input type="text" class="form-control form-control-sm" name="endereco" placeholder="Endereço">
+                            <input type="text" class="form-control form-control-sm" name="endereco" placeholder="Local">
                         </div>
                         <div class="col-md-2 col-6">
                             <select class="form-select form-select-sm" id="estado" name="estado" required>
@@ -122,7 +126,6 @@ $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
                             <select class="form-select form-select-sm" name="tipo" required>
                                 <?php
                                 $buscaTipo = $controllerTipoCompromisso->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
-
                                 if ($buscaTipo['status'] == 'success') {
                                     foreach ($buscaTipo['data'] as $tipo) {
                                         if ($tipo['id'] == '1') {
@@ -227,16 +230,9 @@ $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
                     </form>
                 </div>
             </div>
+
             <div class="card mb-2 ">
                 <div class="card-body p-1">
-                    <?php
-
-                    $dias = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
-
-                    $indiceDia = date('w', strtotime($data));
-
-                    $diaSemana = $dias[$indiceDia];
-                    ?>
                     <div class="bg-primary text-white px-2 py-2 mb-2 rounded-1">
                         <i class="bi bi-calendar3"></i> <?php echo $diaSemana . ', ' . date('d/m/Y', strtotime($data)); ?>
                     </div>
