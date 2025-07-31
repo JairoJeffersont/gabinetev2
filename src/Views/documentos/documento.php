@@ -148,27 +148,7 @@ if ($buscaDocumento['status'] != 'success') {
                         </div>
                         <div class="col-md-3 col-12">
                             <input type="file" class="form-control form-control-sm" name="arquivo" />
-                        </div>
-                        <style>
-                            .tox {
-                                font-size: 12px !important;
-                            }
-                        </style>
-                        <script>
-                            tinymce.init({
-                                selector: '#descricao',
-                                language: 'pt_BR',
-                                license_key: 'gpl',
-                                language_url: 'public/vendor/tinymce/langs/pt_BR.js',
-                                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                                setup: function(editor) {
-                                    editor.on('change', function() {
-                                        tinymce.triggerSave();
-                                    });
-                                }
-                            });
-                        </script>
+                        </div>                        
                         <div class="col-md-12 col-12">
                             <textarea class="form-control form-control-sm" name="descricao" id="descricao" rows="2" placeholder="Resumo do documento" required><?php echo $buscaDocumento['data']['descricao'] ?></textarea>
                         </div>

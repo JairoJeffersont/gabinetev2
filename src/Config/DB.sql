@@ -186,7 +186,7 @@ INSERT INTO tipo_documento (id, nome, gabinete, criado_por) VALUES
 CREATE TABLE
     documento (
         id VARCHAR(36) NOT NULL PRIMARY KEY,
-        nome VARCHAR(255) NOT NULL,
+        nome VARCHAR(255) NOT NULL UNIQUE,
         descricao TEXT DEFAULT NULL,
         ano VARCHAR(4) DEFAULT NULL,
         tipo_id VARCHAR(36) NOT NULL,
