@@ -28,6 +28,7 @@ $rotas = [
     'emenda-status' => '../src/Views/emendas/situacao_emenda.php',
     'emenda-objetivo' => '../src/Views/emendas/objetivo_emenda.php',
     'emendas' => '../src/Views/emendas/emendas.php',
+    'emenda' => '../src/Views/emendas/emenda.php',
 
 ];
 

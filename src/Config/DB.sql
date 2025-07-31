@@ -202,7 +202,12 @@ CREATE TABLE
     )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO situacao_emendas (id, nome, descricao, gabinete, criado_por) VALUES
-    ('1', 'Criada', 'Emenda inserida no sistema', '1', '1');
+    ('1', 'Criada', 'Emenda inserida no sistema', '1', '1'),
+    ('2', 'Em Processo', 'Emenda em processo de análise', '1', '1'),
+    ('3', 'Aprovada', 'Emenda aprovada pelo órgão competente', '1', '1'),
+    ('4', 'Rejeitada', 'Emenda rejeitada pelo órgão competente', '1', '1'),
+    ('5', 'Paga', 'Emenda paga ao beneficiário', '1', '1'),
+    ('6', 'Cancelada', 'Emenda cancelada pelo órgão competente', '1', '1');
 
 CREATE TABLE
     objetivo_emenda(
@@ -218,7 +223,21 @@ CREATE TABLE
     )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO objetivo_emenda (id, nome, descricao, gabinete, criado_por) VALUES
-    ('1', 'Sem objetivo definido', 'Sem objetivo definido', '1', '1');
+    ('1', 'Sem objetivo definido', 'Sem objetivo definido', '1', '1'),
+    ('2', 'Saúde', 'Emenda destinada à área de saúde', '1', '1'),
+    ('3', 'Educação', 'Emenda destinada à área de educação', '1', '1'),
+    ('4', 'Infraestrutura', 'Emenda destinada à infraestrutura', '1', '1'),
+    ('5', 'Assistência Social', 'Emenda destinada à assistência social', '1', '1'),
+    ('6', 'Segurança Pública', 'Emenda destinada à segurança pública', '1', '1'),
+    ('7', 'Cultura e Lazer', 'Emenda destinada à cultura e lazer', '1', '1'),
+    ('8', 'Meio Ambiente', 'Emenda destinada ao meio ambiente', '1', '1'),
+    ('9', 'Desenvolvimento Econômico', 'Emenda destinada ao desenvolvimento econômico', '1', '1'),
+    ('10', 'Habitação', 'Emenda destinada à habitação', '1', '1'),
+    ('11', 'Transporte e Mobilidade', 'Emenda destinada ao transporte e mobilidade', '1', '1'),
+    ('12', 'Agricultura e Pecuária', 'Emenda destinada à agricultura e pecuária', '1', '1'),
+    ('13', 'Turismo', 'Emenda destinada ao turismo', '1', '1'),
+    ('14', 'Tecnologia e Inovação', 'Emenda destinada à tecnologia e inovação', '1', '1'),
+    ('15', 'Transferência especial', 'Emenda PIX', '1', '1');
 
 CREATE TABLE
     emenda (
@@ -242,3 +261,4 @@ CREATE TABLE
         FOREIGN KEY (gabinete) REFERENCES gabinete (id) ON DELETE RESTRICT ON UPDATE RESTRICT,
         FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+

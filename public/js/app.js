@@ -150,6 +150,24 @@ function copyToClipboard() {
 
 
 $(document).ready(function () {
+
+    $('#emenda_valor').mask('###.###.###,##', {
+        reverse: true
+    });
+
+    $('#emenda_numero').mask('0000000000', {
+        reverse: true
+    });
+
+    // Ao sair do campo, completa com zeros à esquerda
+    $('#emenda_numero').on('blur', function () {
+        let valor = $(this).val().replace(/\D/g, ''); // remove caracteres não numéricos
+        if (valor.length > 0) {
+            valor = valor.padStart(10, '0'); // completa com zeros à esquerda
+            $(this).val(valor);
+        }
+    });
+
     const $select = $('#partidos');
     const dataSelected = $select.data('selected'); // Lê o valor de data-selected
 

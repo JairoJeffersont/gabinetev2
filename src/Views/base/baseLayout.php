@@ -35,6 +35,8 @@ $dotenv->load();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <script src="https://cdn.tiny.cloud/1/9ebpappotq2edw5qf3ik3e6m9owenjuy9buc8ddrbngfw88f/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
 
 
 </head>
@@ -45,7 +47,7 @@ $dotenv->load();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center mb-0">
-                    <img src="public/img/loading.gif"/ width="150" class="img-fluid">
+                    <img src="public/img/loading.gif" / width="150" class="img-fluid">
                     <p class="mb-0">Aguarde, processando...</p>
                 </div>
             </div>
