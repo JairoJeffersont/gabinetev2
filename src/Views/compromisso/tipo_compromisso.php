@@ -51,16 +51,20 @@ if ($buscaTipo['status'] != 'success') {
                             'nome' => $_POST['compromisso_tipo_nome']
                         ];
 
-                        $result = $tipoCompromissoController->atualizar($tipoget, $dados);
+                        if ($buscaTipo['data']['gabinete'] == '1') {
+                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">Você não pode editar um item padrão do sistema.</div>';
+                        } else {
+                            $result = $tipoCompromissoController->atualizar($tipoget, $dados);
 
-                        if ($result['status'] == 'success') {
-                            $buscaTipo = $tipoCompromissoController->buscar($tipoget);
+                            if ($result['status'] == 'success') {
+                                $buscaTipo = $tipoCompromissoController->buscar($tipoget);
 
-                            echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
-                        } else if ($result['status'] == 'duplicated') {
-                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
-                        } else if ($result['status'] == 'server_error') {
-                            echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . ' - ' . $result['error_id'] . '</div>';
+                                echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
+                            } else if ($result['status'] == 'duplicated') {
+                                echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
+                            } else if ($result['status'] == 'server_error') {
+                                echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . ' - ' . $result['error_id'] . '</div>';
+                            }
                         }
                     }
 

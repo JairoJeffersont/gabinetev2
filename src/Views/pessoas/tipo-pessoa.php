@@ -41,16 +41,21 @@ if ($buscaTipo['status'] != 'success') {
                             'nome' => $_POST['pessoa_tipo_nome']
                         ];
 
-                        $result = $tipoPessoaController->atualizar($tipoget, $dados);
+                        if ($buscaTipo['data']['gabinete'] == '1') {
+                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">Você não pode editar um item padrão do sistema.</div>';
+                        } else {
 
-                        if ($result['status'] == 'success') {
-                            $buscaTipo = $tipoPessoaController->buscar($tipoget);
+                            $result = $tipoPessoaController->atualizar($tipoget, $dados);
 
-                            echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
-                        } else if ($result['status'] == 'duplicated') {
-                            echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
-                        } else if ($result['status'] == 'server_error') {
-                            echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
+                            if ($result['status'] == 'success') {
+                                $buscaTipo = $tipoPessoaController->buscar($tipoget);
+
+                                echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
+                            } else if ($result['status'] == 'duplicated') {
+                                echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
+                            } else if ($result['status'] == 'server_error') {
+                                echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
+                            }
                         }
                     }
 
