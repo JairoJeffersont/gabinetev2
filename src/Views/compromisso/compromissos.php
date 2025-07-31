@@ -154,7 +154,6 @@ $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
                         <div class="col-md-3 col-4">
                             <select class="form-select form-select-sm" name="categoria_agenda" required>
                                 <option value="Parlamentar" selected>Parlamentar</option>
-                                <option value="Partidária">Partidária</option>
                                 <option value="Pessoal">Pessoal</option>
                             </select>
                         </div>
@@ -169,6 +168,61 @@ $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
                                 echo '<button type="submit" class="btn btn-success btn-sm confirm-action" name="btn_salvar"><i class="bi bi-floppy-fill"></i> Salvar</button>';
                             }
                             ?>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mb-2 ">
+                <div class="card-body custom-card-body p-2">
+                    <form class="row g-2 form_custom mb-0" action="" method="GET" enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" name="secao" value="compromissos" />
+                        <div class="col-md-1 col-6">
+                            <input type="date" class="form-control form-control-sm" name="data" placeholder="Data (dd/mm/aaaa)" value="<?php echo $data ?>" required>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <select class="form-select form-select-sm" name="categoria" required>
+                                <option value="0" <?php echo ($categoriaGet == '0') ? 'selected' : ''; ?>>Todas</option>
+                                <option value="Parlamentar" <?php echo ($categoriaGet == 'Parlamentar') ? 'selected' : ''; ?>>Parlamentar</option>
+                                <option value="Pessoal" <?php echo ($categoriaGet == 'Pessoal') ? 'selected' : ''; ?>>Pessoal</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <select class="form-select form-select-sm" name="tipo" required>
+                                <option value="0" <?php echo ($tipoGet == '0') ? 'selected' : ''; ?>>Todas os tipos</option>
+                                <?php
+                                if ($buscaTipo['status'] == 'success') {
+                                    foreach ($buscaTipo['data'] as $tipo) {
+                                        if ($tipo['id'] == $tipoGet) {
+                                            echo '<option value="' . $tipo['id'] . '" selected>' . $tipo['nome'] . '</option>';
+                                        } else {
+                                            echo '<option value="' . $tipo['id'] . '">' . $tipo['nome'] . '</option>';
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <select class="form-select form-select-sm" name="situacao" required>
+                                <option value="0" <?php echo ($situacaoGet == '0') ? 'selected' : ''; ?>>Todas as situações</option>
+                                <?php
+                                if ($buscaSituacao['status'] == 'success') {
+                                    foreach ($buscaSituacao['data'] as $situacao) {
+                                        if ($situacao['id'] == $situacaoGet) {
+                                            echo '<option value="' . $situacao['id'] . '" selected>' . $situacao['nome'] . '</option>';
+                                        } else {
+                                            echo '<option value="' . $situacao['id'] . '">' . $situacao['nome'] . '</option>';
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-1 col-12">
+                            <button type="submit" class="btn btn-primary btn-sm w-100 w-md-auto">
+                                <i class="bi bi-search"></i> Buscar
+                            </button>
                         </div>
                     </form>
                 </div>
