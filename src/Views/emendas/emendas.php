@@ -17,8 +17,8 @@ $objetivoGet = isset($_GET['objetivo']) ? $_GET['objetivo'] : '0';
 $situacaoGet = isset($_GET['situacao']) ? $_GET['situacao'] : '0';
 $estado = isset($_GET['estado']) ? $_GET['estado'] : '0';
 $municipio = isset($_GET['municipio']) && !empty($_GET['municipio']) ? $_GET['municipio'] : '0';
-
-
+$ordenarPor = isset($_GET['ordenarPor']) ? $_GET['ordenarPor'] : 'numero';
+$ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'desc';
 
 ?>
 
@@ -189,7 +189,7 @@ $municipio = isset($_GET['municipio']) && !empty($_GET['municipio']) ? $_GET['mu
                 <div class="card-body custom-card-body p-2">
                     <form class="row g-2 form_custom mb-0" action="" method="GET" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" name="secao" value="emendas" />
-                        <div class="col-md-1 col-1">
+                        <div class="col-md-1 col-6">
                             <input type="text" class="form-control form-control-sm" name="ano" value="<?php echo $ano; ?>">
                         </div>
                         <div class="col-md-2 col-6">
@@ -233,12 +233,20 @@ $municipio = isset($_GET['municipio']) && !empty($_GET['municipio']) ? $_GET['mu
                                 ?>
                             </select>
                         </div>
-                        <div class="col-md-2 col-6">
-                            <select class="form-select form-select-sm" name="estado">
-                                <option value="0" <?php echo ($estado == '0') ? 'selected' : ''; ?>>Todos os estados</option>
-                                <option value="<?php echo $estadogabinete ?>" <?php echo ($estado == $estadogabinete) ? 'selected' : ''; ?>>Somente <?php echo $estadogabinete ?></option>
+                        <div class="col-md-1 col-6">
+                            <select class="form-select form-select-sm" name="ordenarPor">
+                                <option value="numero" <?php echo ($ordenarPor == 'Número') ? 'selected' : ''; ?>>Número</option>
+                                <option value="valor" <?php echo ($ordenarPor == 'valor') ? 'selected' : ''; ?>>Valor</option>
+                                <option value="municipio" <?php echo ($ordenarPor == 'municipio') ? 'selected' : ''; ?>>Município</option>
                             </select>
                         </div>
+                        <div class="col-md-1 col-6">
+                            <select class="form-select form-select-sm" name="ordem">
+                                <option value="asc" <?php echo ($ordem == 'asc') ? 'selected' : ''; ?>>Crescente</option>
+                                <option value="desc" <?php echo ($ordem == 'desc') ? 'selected' : ''; ?>>Decrescente</option>
+                            </select>
+                        </div>
+                        
 
                         <div class="col-md-1 col-3">
                             <button type="submit" class="btn btn-primary btn-sm w-100 w-md-auto">
@@ -249,7 +257,7 @@ $municipio = isset($_GET['municipio']) && !empty($_GET['municipio']) ? $_GET['mu
                     </form>
                 </div>
             </div>
-            <div class="card shadow-sm mb-2">
+            <div class="card mb-2">
                 <div class="card-body custom-card-body p-2">
                     <div class="table-responsive">
                         <?php
@@ -296,7 +304,8 @@ $municipio = isset($_GET['municipio']) && !empty($_GET['municipio']) ? $_GET['mu
                                             $condicoes['estado'] = $estado;
                                         }
 
-                                        $lista = $EmendaController->listar('numero', 'asc', 1000, 1, $condicoes, 'AND');
+
+                                        $lista = $EmendaController->listar($ordenarPor, $ordem, 1000, 1, $condicoes, 'AND');
 
                                         $totalGeral = 0;
 
