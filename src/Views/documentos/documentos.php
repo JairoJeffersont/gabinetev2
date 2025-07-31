@@ -84,7 +84,7 @@ $termoGet = $_GET['termo'] ?? null;
                             <input type="text" class="form-control form-control-sm" name="ano" value="<?php echo date('Y') ?>" data-mask=0000 required>
                         </div>
                         <div class="col-md-3 col-10">
-                            <input type="text" class="form-control form-control-sm" name="nome" placeholder="Nome do documento. (ex. OF 25/2025..)" required>
+                            <input type="text" class="form-control form-control-sm" name="nome" placeholder="Nome do documento. (ex. 25/2025..)" required>
                         </div>
 
                         <div class="col-md-2 col-12">
