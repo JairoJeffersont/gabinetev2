@@ -3,12 +3,12 @@
 namespace App\Controllers;
 
 use App\Core\BaseController;
-use App\Models\SituacaoCompromisso;
+use App\Models\SituacaoCompromissoModel;
 
 
 class SituacaoCompromissoController extends BaseController {
 
     public function __construct() {
-        parent::__construct(new SituacaoCompromisso());
+        parent::__construct(new SituacaoCompromissoModel());
     }
 }

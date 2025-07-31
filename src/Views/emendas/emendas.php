@@ -163,7 +163,7 @@ $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'desc';
                                 }
                             </style>
                             <script>
-                                /*tinymce.init({
+                                tinymce.init({
                                     selector: '#informacoes',
                                     language: 'pt_BR',
                                     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
@@ -173,7 +173,7 @@ $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'desc';
                                             tinymce.triggerSave();
                                         });
                                     }
-                                });*/
+                                });
                             </script>
                             <textarea class="form-control form-control-sm" id="informacoes" name="informacoes" placeholder="Informações Adicionais. Ex. Ordem de pagamento, códigos gerais..." rows="5" required></textarea>
                         </div>

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\BaseModel;
 
-class SituacaoCompromisso extends BaseModel {
+class SituacaoCompromissoModel extends BaseModel {
 
     protected string $table = 'situacao_compromisso';
 

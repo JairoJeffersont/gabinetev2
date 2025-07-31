@@ -291,10 +291,7 @@ CREATE TABLE
 
 INSERT INTO tipo_compromisso (id, nome, gabinete, criado_por) VALUES
     ('1', 'Sem tipo definido', '1', '1'),
-    ('2', 'Reunião', '1', '1'),
-    ('3', 'Audiência Pública', '1', '1'),
-    ('4', 'Evento Oficial', '1', '1'),
-    ('5', 'Visita Oficial', '1', '1');
+    ('2', 'Reunião', '1', '1'),;
 
 CREATE TABLE 
     situacao_compromisso(

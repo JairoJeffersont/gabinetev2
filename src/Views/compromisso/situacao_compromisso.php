@@ -4,14 +4,14 @@ ob_start();
 
 include '../src/Views/includes/verificaLogado.php';
 
-$tipoCompromissoController = new \App\Controllers\TipoCompromissoController();
+$situacaoCompromissoController = new \App\Controllers\SituacaoCompromissoController();
 
 $tipoget = (isset($_GET['tipo'])) ? $_GET['tipo'] : null;
 
-$buscaTipo = $tipoCompromissoController->buscar($tipoget);
+$buscaTipo = $situacaoCompromissoController->buscar($tipoget);
 
 if ($buscaTipo['status'] != 'success') {
-    header('Location: ?secao=tipos-compromissos');
+    header('Location: ?secao=situacoes-compromissos');
 }
 
 
@@ -27,12 +27,12 @@ if ($buscaTipo['status'] != 'success') {
             <div class="card mb-2 ">
                 <div class="card-body p-1">
                     <a class="btn btn-primary custom-card-body btn-sm link_loading" href="?secao=home" role="button"><i class="bi bi-house-door-fill"></i> Início</a>
-                    <a class="btn btn-success custom-card-body btn-sm link_loading" href="?secao=tipos-compromissos" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
+                    <a class="btn btn-success custom-card-body btn-sm link_loading" href="?secao=situacoes-compromissos" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
                 </div>
             </div>
             <div class="card mb-2">
                 <div class="card-header bg-primary text-white px-2 py-1 custom-card-header">
-                    <i class="bi bi-calendar"></i> Editar tipos de compromissos
+                    <i class="bi bi-calendar"></i> Editar situção de compromisso
                 </div>
 
                 <div class="card-body custom-card-body p-2">
@@ -42,16 +42,16 @@ if ($buscaTipo['status'] != 'success') {
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
 
                         $dados = [
-                            'nome' => $_POST['compromisso_tipo_nome']
+                            'nome' => $_POST['situacao_tipo_nome']
                         ];
 
                         if ($buscaTipo['data']['gabinete'] == '1') {
                             echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">Você não pode editar um item padrão do sistema.</div>';
                         } else {
-                            $result = $tipoCompromissoController->atualizar($tipoget, $dados);
+                            $result = $situacaoCompromissoController->atualizar($tipoget, $dados);
 
                             if ($result['status'] == 'success') {
-                                $buscaTipo = $tipoCompromissoController->buscar($tipoget);
+                                $buscaTipo = $situacaoCompromissoController->buscar($tipoget);
 
                                 echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
                             } else if ($result['status'] == 'duplicated') {
@@ -66,9 +66,9 @@ if ($buscaTipo['status'] != 'success') {
                         if ($buscaTipo['data']['gabinete'] == '1') {
                             echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">Você não pode apagar um item padrão do sistema.</div>';
                         } else {
-                            $result = $tipoCompromissoController->apagar($tipoget);
+                            $result = $situacaoCompromissoController->apagar($tipoget);
                             if ($result['status'] == 'success') {
-                                header('Location: ?secao=tipos-compromissos');
+                                header('Location: ?secao=situacoes-compromissos');
                             } else if ($result['status'] == 'server_error' || $result['status'] == 'forbidden') {
                                 echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" role="alert">' . $result['message'] . '</div>';
                             }
@@ -82,7 +82,7 @@ if ($buscaTipo['status'] != 'success') {
                     ?>
                     <form class="row g-2 form_custom" id="form_novo" method="POST">
                         <div class="col-md-2 col-12">
-                            <input type="text" class="form-control form-control-sm" name="compromisso_tipo_nome" value="<?php echo $buscaTipo['data']['nome']; ?>" placeholder="Nome do Tipo">
+                            <input type="text" class="form-control form-control-sm" name="situacao_tipo_nome" value="<?php echo $buscaTipo['data']['nome']; ?>" placeholder="Nome do Tipo">
                         </div>
                         <div class="col-md-3 col-12">
                             <?php

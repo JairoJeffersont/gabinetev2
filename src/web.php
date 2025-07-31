@@ -31,6 +31,8 @@ $rotas = [
     'emenda' => '../src/Views/emendas/emenda.php',
     'tipos-compromissos' => '../src/Views/compromisso/tipos_compromissos.php',
     'tipo-compromisso' => '../src/Views/compromisso/tipo_compromisso.php',
+    'situacoes-compromissos' => '../src/Views/compromisso/situacoes_compromissos.php',
+    'situacao-compromisso' => '../src/Views/compromisso/situacao_compromisso.php',
 
 ];
 
