@@ -76,6 +76,10 @@ $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'desc';
                             echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2" data-timeout="2">' . $result['message'] . '</div>';
                         }
                     }
+
+                    if ($_SESSION['tipo'] != '1' && $_SESSION['tipo'] != '5') {
+                        echo '<div class="alert alert-danger custom-alert px-2 py-1 mb-2">Você não tem autorização para inserir ou editar emendas.</div>';
+                    }
                     ?>
 
                     <form class="row g-2 form_custom" method="POST">
@@ -246,8 +250,8 @@ $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'desc';
                                 <option value="desc" <?php echo ($ordem == 'desc') ? 'selected' : ''; ?>>Decrescente</option>
                             </select>
                         </div>
-                        
-                        <div class="col-md-1 col-3">
+
+                        <div class="col-md-1 col-12">
                             <button type="submit" class="btn btn-primary btn-sm w-100 w-md-auto">
                                 <i class="bi bi-search"></i> Buscar
                             </button>
