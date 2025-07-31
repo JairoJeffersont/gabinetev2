@@ -141,7 +141,7 @@ if ($termo !== '') {
                             </select>
                         </div>
                         <div class="col-md-2 col-12">
-                            <select class="form-select form-select-sm" id="sexo" name="sexo" required>
+                            <select class="form-select form-select-sm" id="sexo" name="sexo">
                                 <option value="Não informado" selected>Selecione o gênero</option>
                                 <option value="Feminino">Feminino</option>
                                 <option value="Masculino">Masculino</option>
@@ -163,7 +163,7 @@ if ($termo !== '') {
                         </div>
                         <div class="col-md-4 col-12">
                             <div class="input-group input-group-sm">
-                                <select class="form-select form-select-sm" id="orgao" name="orgao" required>
+                                <select class="form-select form-select-sm" id="orgao" name="orgao">
                                     <?php
                                     $buscaOrgaos = $orgaoController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
                                     if ($buscaOrgaos['status'] == 'success') {
@@ -184,7 +184,7 @@ if ($termo !== '') {
                         </div>
                         <div class="col-md-3 col-12">
                             <div class="input-group input-group-sm">
-                                <select class="form-select form-select-sm" id="tipo_id" name="tipo_id" required>
+                                <select class="form-select form-select-sm" id="tipo_id" name="tipo_id">
                                     <?php
                                     $buscaTipos = $tipoPessoaController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
                                     if ($buscaTipos['status'] == 'success') {
@@ -304,6 +304,14 @@ if ($termo !== '') {
             </div>
             <div class="card mb-2 ">
                 <div class="card-body custom-card-body p-2">
+                    <?php
+                    
+                    if($estado == $estadogabinete){
+                        echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="0">Mostrando somente pessoas do estado ('.$estadogabinete.').</div>';
+                    }
+                    
+                    ?>
+                    
                     <div class="table-responsive">
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered mb-0">

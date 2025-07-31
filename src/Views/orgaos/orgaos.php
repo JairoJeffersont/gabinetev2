@@ -224,6 +224,12 @@ $filtros['gabinete'] = $_SESSION['gabinete'];
             </div>
             <div class="card mb-2 ">
                 <div class="card-body custom-card-body p-2">
+                    <?php
+                    if ($estado == $estadogabinete) {
+                        echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="0">Mostrando somente órgãos/entidades do estado (' . $estadogabinete . ').</div>';
+                    }
+
+                    ?>
                     <div class="table-responsive">
                         <div class="table-responsive">
                             <table class="table table-hover table-striped table-bordered mb-0">
@@ -302,7 +308,7 @@ $filtros['gabinete'] = $_SESSION['gabinete'];
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
