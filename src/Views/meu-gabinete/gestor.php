@@ -49,6 +49,7 @@ $buscaUsuario = $usuarioController->buscar($usuarioSessao, 'id');
 
             $dadosGabinete = [
                 'cidade' => $_POST['gabinete_municipio'],
+                'estado' => $_POST['gabinete_estado'],
                 'partido' => $_POST['gabinete_partido']
             ];
 

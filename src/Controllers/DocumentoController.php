@@ -22,8 +22,11 @@ class DocumentoController extends BaseController {
             'application/msword', // Word (doc)
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // Word (docx)
             'application/vnd.ms-excel', // Excel (xls)
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' // Excel (xlsx)
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Excel (xlsx)
+            'image/jpeg', // JPG e JPEG
+            'image/png',  // PNG
         ];
+
 
 
         if (isset($dados['arquivo'])) {
@@ -41,7 +44,7 @@ class DocumentoController extends BaseController {
 
     public function atualizarDocumento($id, $dados) {
 
-        $mimeTypes = [            
+        $mimeTypes = [
             'application/pdf', // PDF
             'application/msword', // Word (doc)
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // Word (docx)
@@ -69,7 +72,7 @@ class DocumentoController extends BaseController {
         return $this->atualizar($id, $dados);
     }
 
-        public function apagarDocumento($id) {
+    public function apagarDocumento($id) {
         $busca = $this->buscar($id);
         if (!empty($busca['data']['arquivo'])) {
             print_r($this->fileUploader->deleteFile($busca['data']['arquivo']));

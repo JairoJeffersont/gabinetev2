@@ -247,7 +247,6 @@ $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : 'desc';
                             </select>
                         </div>
                         
-
                         <div class="col-md-1 col-3">
                             <button type="submit" class="btn btn-primary btn-sm w-100 w-md-auto">
                                 <i class="bi bi-search"></i> Buscar

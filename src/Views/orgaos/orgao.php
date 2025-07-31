@@ -190,7 +190,7 @@ if ($buscaOrgao['status'] != 'success') {
 
             <div class="card mb-2 ">
                 <div class="card-body custom-card-body p-2">
-                    <h6 class="card-title mb-2 " style="font-size: 1.2em;"><i class="bi bi-geo-alt-fill"></i> <b>Localização</b></h6>
+                    <h6 class="card-title mb-2 " style="font-size: 1.2em;"><i class="bi bi-geo-alt-fill"></i> <b>Localização (arredores)</b></h6>
                     <iframe
                         src="https://www.google.com/maps?q=<?php echo urlencode($buscaOrgao['data']['nome']) ?>&output=embed"
                         width="100%"

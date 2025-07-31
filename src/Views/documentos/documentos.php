@@ -40,7 +40,7 @@ $termoGet = $_GET['termo'] ?? null;
                         Nesta seção, é possível adicionar e editar documentos do gabinete, garantindo a organização correta dessas informações no sistema.
                     </p>
                     <p class="card-text mb-0">
-                        Todos os campos são obrigatórios. São permitidos arquivos <b>PDF, Word e Excel</b>. Tamanho máximo de <b>20MB</b>
+                        Todos os campos são obrigatórios. São permitidos arquivos <b>PDF, Word, Excel, JPG e PNG</b>. Tamanho máximo de <b>20MB</b>
                     </p>
                 </div>
             </div>
@@ -63,7 +63,7 @@ $termoGet = $_GET['termo'] ?? null;
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
 
                         $result = $documentoController->novoDocumento($dados);
-                      
+
 
                         if ($result['status'] == 'success') {
                             echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';

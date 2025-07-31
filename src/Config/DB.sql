@@ -78,7 +78,12 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO orgao_tipo (id, nome, gabinete, criado_por) VALUES
-    ('1', 'Sem tipo definido', '1', '1');
+    ('1', 'Sem tipo definido', '1', '1'),
+    ('2', 'Ministério', '1', '1'),
+    ('3', 'Secretaria', '1', '1'),
+    ('4', 'Prefeitura', '1', '1'),
+    ('5', 'Assembléia Legislativa', '1', '1'),
+    ('6', 'Câmara de Vereadores', '1', '1');
 
 CREATE TABLE
     orgao (
@@ -120,7 +125,12 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO pessoa_tipo (id, nome, gabinete, criado_por) VALUES
-    ('1', 'Sem tipo definido', '1', '1');
+    ('1', 'Sem tipo definido', '1', '1'),
+    ('2', 'Eleitor', '1', '1'),
+    ('3', 'Autoridade', '1', '1'),
+    ('4', 'Amigos', '1', '1'),
+    ('5', 'Família', '1', '1');
+
 
 CREATE TABLE
     pessoa (
@@ -167,7 +177,11 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 INSERT INTO tipo_documento (id, nome, gabinete, criado_por) VALUES
-    ('1', 'Sem tipo definido', '1', '1');
+    ('1', 'Sem tipo definido', '1', '1'),
+    ('2', 'Ofício', '1', '1'),
+    ('3', 'Carta', '1', '1'),
+    ('4', 'Convite', '1', '1'),
+    ('5', 'Relatório', '1', '1');
 
 CREATE TABLE
     documento (
