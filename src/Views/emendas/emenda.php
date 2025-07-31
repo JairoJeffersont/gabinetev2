@@ -186,6 +186,7 @@ if ($buscaEmenda['status'] != 'success') {
                                     language_url: 'public/vendor/tinymce/langs/pt_BR.js',
                                     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                                     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                                    content_style: 'body { font-size: 12px; }',
                                     setup: function(editor) {
                                         editor.on('change', function() {
                                             tinymce.triggerSave();
