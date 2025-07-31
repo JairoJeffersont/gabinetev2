@@ -35,10 +35,7 @@ $dotenv->load();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    
     <script src="public/vendor/tinymce/tinymce.min.js"></script>
-
-
 </head>
 
 <body>
@@ -56,6 +53,7 @@ $dotenv->load();
     <script src="public/vendor/jquery/jquery.min.js"></script>
     <script src="public/vendor/jquery-mask/jquery.mask.min.js"></script>
     <script src="public/vendor/bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
     <script src="public/vendor/startbootstrap-simple-sidebar-master/dist/js/scripts.js"></script>
     <script src="public/js/app.js"></script>
 </body>

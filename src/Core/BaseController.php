@@ -129,7 +129,7 @@ abstract class BaseController {
         try {
             $resultado = $this->model->listas($ordenarPor, $ordem, $itens, $pagina, $condicoes, $operador);
 
-            if(empty($resultado['data'])){
+            if (empty($resultado['data'])) {
                 return ['status' => 'empty', 'message' => 'Nenhum registro encontrado'];
             }
 
