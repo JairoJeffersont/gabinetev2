@@ -79,10 +79,10 @@ $municipio = isset($_GET['municipio']) && !empty($_GET['municipio']) ? $_GET['mu
                     ?>
 
                     <form class="row g-2 form_custom" method="POST">
-                        <div class="col-md-1 col-12">
+                        <div class="col-md-1 col-6">
                             <input type="text" class="form-control form-control-sm" name="ano" placeholder="Ano" value="<?= date('Y') ?>" required>
                         </div>
-                        <div class="col-md-1 col-12">
+                        <div class="col-md-1 col-6">
                             <input type="text" class="form-control form-control-sm" id="emenda_numero" name="numero" placeholder="Número da Emenda" maxlength="10" required>
                         </div>
 
@@ -100,36 +100,46 @@ $municipio = isset($_GET['municipio']) && !empty($_GET['municipio']) ? $_GET['mu
                             </select>
                         </div>
                         <div class="col-md-4 col-12">
-                            <select class="form-select form-select-sm" name="situacao_id" required>
-                                <?php
-                                $buscaSituacao = $EmendaSituacaoController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
-                                if ($buscaSituacao['status'] == 'success') {
-                                    foreach ($buscaSituacao['data'] as $situacao) {
-                                        if ($situacao['id'] == '1') {
-                                            echo '<option value="' . $situacao['id'] . '" selected>' . $situacao['nome'] . '</option>';
-                                        } else {
-                                            echo '<option value="' . $situacao['id'] . '">' . $situacao['nome'] . '</option>';
+                            <div class="input-group input-group-sm">
+                                <select class="form-select form-select-sm" name="situacao_id" required>
+                                    <?php
+                                    $buscaSituacao = $EmendaSituacaoController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
+                                    if ($buscaSituacao['status'] == 'success') {
+                                        foreach ($buscaSituacao['data'] as $situacao) {
+                                            if ($situacao['id'] == '1') {
+                                                echo '<option value="' . $situacao['id'] . '" selected>' . $situacao['nome'] . '</option>';
+                                            } else {
+                                                echo '<option value="' . $situacao['id'] . '">' . $situacao['nome'] . '</option>';
+                                            }
                                         }
                                     }
-                                }
-                                ?>
-                            </select>
+                                    ?>
+                                </select>
+                                <a href="?secao=emendas-status" type="button" class="btn btn-secondary confirm-action" title="Adicionar novo tipo">
+                                    <i class="bi bi-plus"></i> novo tipo
+                                </a>
+                            </div>
                         </div>
                         <div class="col-md-4 col-12">
-                            <select class="form-select form-select-sm" name="objetivo_id" required>
-                                <?php
-                                $buscaObjetivo = $EmendaObjetivoController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
-                                if ($buscaObjetivo['status'] == 'success') {
-                                    foreach ($buscaObjetivo['data'] as $objetivo) {
-                                        if ($objetivo['id'] == '1') {
-                                            echo '<option value="' . $objetivo['id'] . '" selected>' . $objetivo['nome'] . '</option>';
-                                        } else {
-                                            echo '<option value="' . $objetivo['id'] . '">' . $objetivo['nome'] . '</option>';
+                            <div class="input-group input-group-sm">
+                                <select class="form-select form-select-sm" name="objetivo_id" required>
+                                    <?php
+                                    $buscaObjetivo = $EmendaObjetivoController->listar('nome', 'asc', 1000, 1, ['gabinete' => [$_SESSION['gabinete'], '1']]);
+                                    if ($buscaObjetivo['status'] == 'success') {
+                                        foreach ($buscaObjetivo['data'] as $objetivo) {
+                                            if ($objetivo['id'] == '1') {
+                                                echo '<option value="' . $objetivo['id'] . '" selected>' . $objetivo['nome'] . '</option>';
+                                            } else {
+                                                echo '<option value="' . $objetivo['id'] . '">' . $objetivo['nome'] . '</option>';
+                                            }
                                         }
                                     }
-                                }
-                                ?>
-                            </select>
+                                    ?>
+                                </select>
+                                <a href="?secao=emendas-objetivos" type="button" class="btn btn-secondary confirm-action" title="Adicionar novo tipo">
+                                    <i class="bi bi-plus"></i> novo objetivo
+                                </a>
+                            </div>
                         </div>
 
                         <div class="col-md-4 col-12">
