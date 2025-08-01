@@ -227,7 +227,7 @@ $diaSemana = $dias[$indiceDia];
             </div>
 
             <div class="card mb-2 ">
-                <div class="card-header bg-primary text-white px-2 py-1 custom-card-body">
+                <div class="card-header bg-primary text-white px-2 py-1">
                     <i class="bi bi-calendar"></i> <?php echo $diaSemana . ', ' . date('d/m/Y', strtotime($data)); ?>
                 </div>
                 <div class="card-body p-1">

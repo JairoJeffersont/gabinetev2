@@ -6,11 +6,15 @@ include '../src/Views/includes/verificaLogado.php';
 
 $gabineteController = new \App\Controllers\GabineteController();
 $usuarioController = new \App\Controllers\UsuarioController();
+$compromissoController = new \App\Controllers\CompromissoController();
+$controllerSituacaoCompromisso = new \App\Controllers\SituacaoCompromissoController();
 
 $buscaGabinete = $gabineteController->buscar($_SESSION['gabinete']);
 $buscaUsuario = $usuarioController->buscar($_SESSION['id']);
 
 $buscaUsuarios = $usuarioController->listar('nome', 'asc', 1000, 1, ['gabinete' => $_SESSION['gabinete'], 'ativo' => 0], 'and');
+
+$buscaEvento = $compromissoController->listar('hora', 'asc', 1000, 1, ['gabinete' => $_SESSION['gabinete'], 'data'  => date('Y-m-d')], 'AND');
 
 ?>
 
@@ -58,6 +62,35 @@ $buscaUsuarios = $usuarioController->listar('nome', 'asc', 1000, 1, ['gabinete' 
                 echo '</div></div>';
             }
             ?>
+
+            <div class="card mb-2 ">
+                <div class="card-header bg-primary text-white px-2 py-1 custom-card-body fw-bold">
+                    <i class="bi bi-calendar"></i> Compromissos do dia
+                </div>
+                <div class="card-body p-1">
+                    <div class="list-group">
+
+                        <?php
+                        if ($buscaEvento['status'] == 'success') {
+                            foreach ($buscaEvento['data'] as $evento) {
+                                $situacao = $controllerSituacaoCompromisso->buscar($evento['situacao_id'], 'id')['data']['nome'];
+                                echo '<a href="?secao=compromisso&id=' . $evento['id'] . '" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-2">' . date('H:i', strtotime($evento['hora'])) . ' - <small>' . $situacao . '</small></h6>                                        
+                                        </div>
+                                        <p class="mb-0" style="font-size:0.8em">' . $evento['titulo'] . '</p>
+                                        <small class="text-body-secondary" style="font-size:0.8em">' . $evento['endereco'] . '</small>
+                                    </a>';
+                            }
+                        } else if ($buscaEvento['status'] == 'empty') {
+                            echo ' <li class="list-group-item"  style="font-size:0.9em">Sem compromissos para hoje <br> <a href="?secao=compromissos">ver compromissos</a></li>';
+                        } else if ($buscaEvento['status'] == 'server_error') {
+                            echo ' <li class="list-group-item">' . $buscaEvento['message'] . ' | ' . $buscaEvento['error_id'] . '</li>';
+                        }
+                        ?>
+                    </div>
+                </div>                
+            </div>
         </div>
     </div>
 </div>
