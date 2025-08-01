@@ -260,7 +260,7 @@ $diaSemana = $dias[$indiceDia];
                         if ($buscaEvento['status'] == 'success') {
                             foreach ($buscaEvento['data'] as $evento) {
                                 $situacao = $controllerSituacaoCompromisso->buscar($evento['situacao_id'], 'id')['data']['nome'];
-                                echo '<a href="#" class="list-group-item list-group-item-action">
+                                echo '<a href="?secao=compromisso&id='.$evento['id'].'" class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h6 class="mb-2"><i class="bi bi-clock" style="font-size:0.8em"></i> ' . date('H:i', strtotime($evento['data_hora'])) . '</h6>                                        
                                         </div>
