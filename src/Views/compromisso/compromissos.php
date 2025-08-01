@@ -230,10 +230,10 @@ $diaSemana = $dias[$indiceDia];
             </div>
 
             <div class="card mb-2 ">
+                <div class="card-header bg-primary text-white px-2 py-1 fw-bold" style="font-size: 0.9em;">
+                    <i class="bi bi-calendar"></i> &nbsp;<?php echo $diaSemana . ', ' . date('d/m/Y', strtotime($data)); ?>
+                </div>
                 <div class="card-body p-1">
-                    <div class="bg-secondary text-white px-2 py-2 mb-2 rounded-1" style="font-size:0.850em">
-                        <i class="bi bi-calendar3"></i> <?php echo $diaSemana . ', ' . date('d/m/Y', strtotime($data)); ?>
-                    </div>
                     <div class="list-group">
 
                         <?php
@@ -260,7 +260,7 @@ $diaSemana = $dias[$indiceDia];
                         if ($buscaEvento['status'] == 'success') {
                             foreach ($buscaEvento['data'] as $evento) {
                                 $situacao = $controllerSituacaoCompromisso->buscar($evento['situacao_id'], 'id')['data']['nome'];
-                                echo '<a href="?secao=compromisso&id='.$evento['id'].'" class="list-group-item list-group-item-action">
+                                echo '<a href="?secao=compromisso&id=' . $evento['id'] . '" class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h6 class="mb-2"><i class="bi bi-clock" style="font-size:0.8em"></i> ' . date('H:i', strtotime($evento['data_hora'])) . '</h6>                                        
                                         </div>

@@ -291,7 +291,7 @@ CREATE TABLE
 
 INSERT INTO tipo_compromisso (id, nome, gabinete, criado_por) VALUES
     ('1', 'Sem tipo definido', '1', '1'),
-    ('2', 'Reunião', '1', '1'),;
+    ('2', 'Reunião', '1', '1');
 
 CREATE TABLE 
     situacao_compromisso(
@@ -310,7 +310,7 @@ INSERT INTO situacao_compromisso (id, nome, descricao, gabinete, criado_por) VAL
     ('1', 'A confirmar', 'Compromisso pendente de confirmação', '1', '1'),
     ('2', 'Confirmado', 'Compromisso confirmado', '1', '1'),
     ('3', 'Cancelado', 'Compromisso cancelado', '1', '1'),
-    ('4', 'Concluído', 'Compromisso concluído com sucesso', '1', '1');
+    ('4', 'Finalizado', 'Compromisso Finalizado com sucesso', '1', '1');
 
 CREATE TABLE 
     compromisso (
