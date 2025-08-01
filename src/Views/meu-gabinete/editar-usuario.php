@@ -41,11 +41,16 @@ $buscaTipo = $tipoUsuarioController->listar();
             </div>
 
             <div class="card mb-2">
-                <div class="card-header custom-card-header px-2 py-1"> <i class="bi bi-person-gear"></i> Editar usuário </div>
+                <div class="card-header custom-card-header px-2 py-1">
+                    <i class="bi bi-person-gear"></i> Gerenciar Usuário
+                </div>
                 <div class="card-body custom-card-body p-2">
-                    <p class="card-text">Nessa seção você pode mudar o tipo de usuário ou apagar ele.</p>
+                    <p class="card-text mb-2">Nesta seção, você pode alterar o tipo de usuário ou removê-lo do sistema.</p>
+                    <p class="card-text mb-0"><i class="bi bi-exclamation-triangle-fill"></i> <b>Se o usuário possuir conteúdo associado, a exclusão não será possível. Nesse caso, desative-o.</b></p>
                 </div>
             </div>
+
+
             <div class="card card-perfil w-100 p-2 d-flex flex-row align-items-center mb-2 text-white">
                 <img src="public/<?= ($buscaUsuario['data']['foto']) ? $buscaUsuario['data']['foto'] : 'img/images.png' ?>" alt="Foto do usuário" class="foto-perfil me-3">
                 <div>
