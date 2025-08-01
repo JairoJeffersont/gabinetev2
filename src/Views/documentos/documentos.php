@@ -132,7 +132,7 @@ $termoGet = $_GET['termo'] ?? null;
                         <div class="col-md-3 col-12">
                             <input type="file" class="form-control form-control-sm" name="arquivo" required />
                         </div>
-                        
+
                         <div class="col-md-12 col-12">
                             <textarea class="form-control form-control-sm" name="descricao" id="descricao" rows="2" placeholder="Resumo do documento" required></textarea>
                         </div>
@@ -204,11 +204,17 @@ $termoGet = $_GET['termo'] ?? null;
 
                                     <?php
 
-                                    $condicoes = [
+                                    if ($termoGet == null) {
+                                        $condicoes = [
+                                            'gabinete' => $_SESSION['gabinete'],
+                                            'ano'      => $anoGet
+                                        ];
+                                    }else{
+                                         $condicoes = [
                                         'gabinete' => $_SESSION['gabinete'],
-                                        'ano'      => $anoGet,
                                         'nome'     => ['LIKE' => "%$termoGet%"]
                                     ];
+                                    }
 
                                     if ($tipoGet != '0') {
                                         $condicoes['tipo_id'] = $tipoGet;
