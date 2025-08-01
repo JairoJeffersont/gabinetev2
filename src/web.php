@@ -35,6 +35,7 @@ $rotas = [
     'situacoes-compromissos' => '../src/Views/compromisso/situacoes_compromissos.php',
     'situacao-compromisso' => '../src/Views/compromisso/situacao_compromisso.php',
     'compromissos' => '../src/Views/compromisso/compromissos.php',
+    'compromisso' => '../src/Views/compromisso/compromisso.php',
 
 ];
 
