@@ -1,12 +1,12 @@
 <?php
 
-use App\Controllers\CompromissoController;
-use App\Controllers\SituacaoCompromissoController;
-use App\Controllers\TipoCompromissoController;
-
 ob_start();
 
 include '../src/Views/includes/verificaLogado.php';
+
+use App\Controllers\CompromissoController;
+use App\Controllers\SituacaoCompromissoController;
+use App\Controllers\TipoCompromissoController;
 
 $controllerTipoCompromisso = new TipoCompromissoController();
 $controllerSituacaoCompromisso = new SituacaoCompromissoController();
