@@ -18,9 +18,7 @@ $situacaoGet = isset($_GET['situacao']) ? $_GET['situacao'] : '0';
 $categoriaGet = isset($_GET['categoria']) ? $_GET['categoria'] : '0';
 
 $dias = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
-
 $indiceDia = date('w', strtotime($data));
-
 $diaSemana = $dias[$indiceDia];
 
 ?>
@@ -233,7 +231,7 @@ $diaSemana = $dias[$indiceDia];
 
             <div class="card mb-2 ">
                 <div class="card-body p-1">
-                    <div class="bg-primary text-white px-2 py-2 mb-2 rounded-1">
+                    <div class="bg-secondary text-white px-2 py-2 mb-2 rounded-1" style="font-size:0.850em">
                         <i class="bi bi-calendar3"></i> <?php echo $diaSemana . ', ' . date('d/m/Y', strtotime($data)); ?>
                     </div>
                     <div class="list-group">

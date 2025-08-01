@@ -13,7 +13,7 @@ class CompromissoModel extends BaseModel {
         'id' => ['type' => 'VARCHAR(36)', 'required' => true, 'primary' => true],
         'titulo' => ['type' => 'VARCHAR(255)', 'required' => true],
         'descricao' => ['type' => 'TEXT', 'required' => false, 'default' => null],
-        'data_hora' => ['type' => 'DATETIME', 'required' => true],
+        'data_hora' => ['type' => 'DATETIME', 'required' => true, 'unique' => true],
         'endereco' => ['type' => 'TEXT', 'required' => false, 'default' => null],
         'estado' => ['type' => 'VARCHAR(2)', 'required' => true],
         'municipio' => ['type' => 'TEXT', 'required' => false, 'default' => null],
