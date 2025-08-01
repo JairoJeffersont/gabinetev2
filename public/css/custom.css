@@ -6,9 +6,11 @@ a {
 }
 
 body {
-    -webkit-font-smoothing: antialiased; /* Chrome, Safari */
-    -moz-osx-font-smoothing: grayscale;  /* Firefox (macOS) */
-    
+    -webkit-font-smoothing: antialiased;
+    /* Chrome, Safari */
+    -moz-osx-font-smoothing: grayscale;
+    /* Firefox (macOS) */
+
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -17,7 +19,8 @@ body {
     background-image: url('../img/main_background.jpg');
     background-repeat: repeat;
     background-size: cover;
-    background-color: #fff; /* mais simples */
+    background-color: #fff;
+    /* mais simples */
 }
 
 
@@ -104,3 +107,4 @@ body {
 .accordion-button {
     font-size: 14px !important;
 }
+
