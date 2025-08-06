@@ -25,79 +25,94 @@ class GetApi {
     }
 
     /**
-     * Realiza uma requisição GET para uma URL que retorna JSON.
-     *
-     * @param string $url URL da API a ser chamada.
-     * @return array Retorna um array com status, dados (em caso de sucesso),
-     *               ou mensagem e ID do erro (em caso de falha).
-     *
-     * Formatos de retorno possíveis:
-     * - Sucesso:
-     *   [
-     *     'status' => 'success',
-     *     'data' => mixed
-     *   ]
-     *
-     * - Erro interno:
-     *   [
-     *     'status' => 'server_error',
-     *     'message' => 'Erro interno do servidor.',
-     *     'error_id' => string
-     *   ]
-     *
-     * - JSON inválido:
-     *   [
-     *     'status' => 'invalid_response',
-     *     'message' => 'Resposta da API não é um JSON válido.',
-     *     'error_id' => string
-     *   ]
-     */
-    public function getJson(string $url): array {
-        $ch = curl_init();
+ * Realiza uma requisição GET para uma URL que retorna JSON.
+ *
+ * @param string $url URL da API a ser chamada.
+ * @return array Retorna um array com status, dados, headers (em caso de sucesso),
+ *               ou mensagem e ID do erro (em caso de falha).
+ *
+ * Formatos de retorno possíveis:
+ * - Sucesso:
+ *   [
+ *     'status' => 'success',
+ *     'data' => mixed,
+ *     'headers' => array
+ *   ]
+ *
+ * - Erro interno:
+ *   [
+ *     'status' => 'server_error',
+ *     'message' => 'Erro interno do servidor.',
+ *     'error_id' => string
+ *   ]
+ *
+ * - JSON inválido:
+ *   [
+ *     'status' => 'invalid_response',
+ *     'message' => 'Resposta da API não é um JSON válido.',
+ *     'error_id' => string
+ *   ]
+ */
+public function getJson(string $url): array {
+    $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    $headers = [];
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Accept: application/json'
-        ]);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
-        $response = curl_exec($ch);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Accept: application/json'
+    ]);
 
-        if (curl_errno($ch)) {
-            $error = curl_error($ch);
-            curl_close($ch);
-            $error_id = uniqid();
-            $this->logger->newLog('api_error_log', $error_id . ' | ' . $error);
-            return [
-                'status' => 'server_error',
-                'message' => 'Erro interno do servidor.',
-                'error_id' => $error_id
-            ];
+    // Captura os headers da resposta
+    curl_setopt($ch, CURLOPT_HEADERFUNCTION, function($curl, $header) use (&$headers) {
+        $len = strlen($header);
+        $header = explode(':', $header, 2);
+        if (count($header) == 2) {
+            $headers[trim($header[0])] = trim($header[1]);
         }
+        return $len;
+    });
 
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        $error = curl_error($ch);
         curl_close($ch);
-
-        $json = json_decode($response, true);
-
-        if ($json === null) {
-            $error_id = uniqid();
-            $this->logger->newLog('api_error_log', $error_id . ' | Resposta inválida da API.');
-            return [
-                'status' => 'invalid_response',
-                'message' => 'Resposta da API não é um JSON válido.',
-                'error_id' => $error_id
-            ];
-        }
-
+        $error_id = uniqid();
+        $this->logger->newLog('api_error_log', $error_id . ' | ' . $error);
         return [
-            'status' => 'success',
-            'data' => $json
+            'status' => 'server_error',
+            'message' => 'Erro interno do servidor.',
+            'error_id' => $error_id
         ];
     }
+
+    curl_close($ch);
+
+    $json = json_decode($response, true);
+
+    if ($json === null) {
+        $error_id = uniqid();
+        $this->logger->newLog('api_error_log', $error_id . ' | Resposta inválida da API.');
+        return [
+            'status' => 'invalid_response',
+            'message' => 'Resposta da API não é um JSON válido.',
+            'error_id' => $error_id
+        ];
+    }
+
+    return [
+        'status' => 'success',
+        'data' => $json,
+        'headers' => $headers
+    ];
+}
+
 
     /**
      * Realiza uma requisição GET para uma URL que retorna XML.

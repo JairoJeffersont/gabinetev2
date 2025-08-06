@@ -129,23 +129,7 @@
 
  <div class="card mb-2 ">
      <div class="card-body custom-card-body p-1">
-         <?php
-
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_atualizar'])) {
-                
-
-                $result = $proposicaoController->atualizarProposicoesCD(date('Y-m-d'));
-                
-
-                if ($result['status'] == 'success') {
-                    echo '<div class="alert alert-success custom-alert px-2 py-1 mb-2" role="alert" data-timeout="2">' . $result['message'] . '</div>';
-                } else if ($result['status'] == 'empty') {
-                    echo '<div class="alert alert-info custom-alert px-2 py-1 mb-2" role="alert" data-timeout="4">' . $result['message'] . '</div>';
-                } 
-            }
-
-            ?>
-         <div class="table-responsive mb-2">
+         <div class="table-responsive">
              <div class="table-responsive">
                  <table class="table table-hover table-striped table-bordered mb-0">
                      <thead>
@@ -191,10 +175,5 @@
                  </table>
              </div>
          </div>
-         <form class="row g-2 form_custom" id="form_novo" method="POST">
-             <div class="col-md-1 col-2">
-                 <button type="submit" class="btn btn-success btn-sm confirm-action" name="btn_atualizar"><i class="bi bi-arrow-clockwise"></i> Atualizar</button>
-             </div>
-         </form>
      </div>
  </div>
