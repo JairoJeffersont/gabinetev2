@@ -36,6 +36,8 @@ $rotas = [
     'situacao-compromisso' => '../src/Views/compromisso/situacao_compromisso.php',
     'compromissos' => '../src/Views/compromisso/compromissos.php',
     'compromisso' => '../src/Views/compromisso/compromisso.php',
+    'proposicoes' => '../src/Views/proposicoes/proposicoes.php',
+
 
 ];
 
@@ -44,4 +46,3 @@ if (array_key_exists($pagina, $rotas)) {
 } else {
     include '../src/Views/errors/404.php';
 }
-

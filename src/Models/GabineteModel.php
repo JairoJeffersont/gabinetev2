@@ -11,6 +11,7 @@ class GabineteModel extends BaseModel {
     protected array $columns = [
         'id' => ['type' => 'VARCHAR(36)', 'required' => true, 'primary' => true],
         'nome' => ['type' => 'VARCHAR(100)', 'required' => true, 'unique' => true],
+        'nome_slug' => ['type' => 'VARCHAR(100)', 'required' => true],
         'estado' => ['type' => 'VARCHAR(2)', 'required' => true],
         'cidade' => ['type' => 'VARCHAR(100)', 'required' => false, 'default' => null],
         'partido' => ['type' => 'VARCHAR(100)', 'required' => false, 'default' => null],

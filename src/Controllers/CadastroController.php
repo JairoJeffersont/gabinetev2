@@ -22,6 +22,7 @@ class CadastroController {
 
         $gabinete = [
             'nome' => $dados['gabinete_nome'],
+            'nome_slug' => $dados['gabinete_nome_slug'],
             'tipo' => $dados['gabinete_tipo'],
             'estado' => $dados['gabinete_estado']
         ];

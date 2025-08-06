@@ -12,6 +12,8 @@
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_salvar'])) {
 
+            $validation = new \App\Helpers\Validation();
+
             $dadosFormulario = [
                 'usuario_nome'      => $_POST['usuario_nome'] ?? '',
                 'usuario_email'     => $_POST['usuario_email'] ?? '',
@@ -21,6 +23,7 @@
                 'gabinete_tipo'     => $_POST['gabinete_tipo'] ?? '',
                 'gabinete_estado'   => $_POST['gabinete_estado'] ?? '',
                 'gabinete_nome'     => $_POST['gabinete_nome'] ?? '',
+                'gabinete_nome_slug'     => $validation->slug($_POST['gabinete_nome']) ?? '',
             ];
 
             $cadastroController = new \App\Controllers\CadastroController();

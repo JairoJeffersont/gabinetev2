@@ -16,6 +16,7 @@ CREATE TABLE
     gabinete (
         id VARCHAR(36) NOT NULL PRIMARY KEY,
         nome VARCHAR(100) NOT NULL UNIQUE,
+        nome_slug VARCHAR(100) NOT NULL,
         estado VARCHAR(2) NOT NULL,
         cidade VARCHAR(100) DEFAULT NULL,
         partido VARCHAR(100) DEFAULT NULL,
@@ -26,8 +27,8 @@ CREATE TABLE
         FOREIGN KEY (tipo) REFERENCES gabinete_tipo (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
-INSERT INTO gabinete (id, nome, estado, cidade, partido, tipo) VALUES
-    ('1', 'Gabinete Sistema', 'DF', 'Brasília', 'Sem partido', '1');
+INSERT INTO gabinete (id, nome, nome_slug,  estado, cidade, partido, tipo) VALUES
+    ('1', 'Gabinete Sistema', 'gabinete-sistema', 'DF', 'Brasília', 'Sem partido', '1');
 
 CREATE TABLE
     usuario_tipo (
@@ -335,3 +336,41 @@ CREATE TABLE
         FOREIGN KEY (criado_por) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
     )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+
+    CREATE TABLE
+        deputado(
+            deputado_id INT PRIMARY KEY,
+            deputado_nome TEXT DEFAULT NULL,
+            deputado_nascimento DATE DEFAULT NULL,
+            deputado_vivo TINYINT DEFAULT NULL,
+            deputado_foto TEXT DEFAULT NULL
+    )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+    CREATE TABLE 
+        proposicao (
+            proposicao_id INT PRIMARY KEY,
+            proposicao_titulo TEXT,
+            proposicao_ano INT DEFAULT NULL,
+            proposicao_tipo VARCHAR(10) DEFAULT NULL,
+            proposicao_ementa TEXT,
+            proposicao_apresentacao DATE DEFAULT NULL,
+            proposicao_principal INT DEFAULT NULL,
+            proposicao_tramitacao TINYINT DEFAULT NULL,
+            proposicao_casa INT DEFAULT NULL,
+            INDEX idx_proposicao_id (proposicao_id),
+            INDEX idx_proposicao_titulo (proposicao_titulo(200))
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+    CREATE TABLE 
+        proposicao_autor (
+            proposicao_id INT DEFAULT NULL,
+            autor_proposicao_id INT DEFAULT NULL,
+            autor_proposicao_nome TEXT DEFAULT NULL,
+            autor_proposicao_nome_slug TEXT DEFAULT NULL,
+            proposicao_ano INT DEFAULT NULL,
+            proposicao_assinatura INT DEFAULT NULL,
+            proposicao_proponente INT DEFAULT NULL,
+            INDEX idx_proposicao_id (proposicao_id),
+            INDEX autor_proposicao_nome (autor_proposicao_nome(100)),
+            INDEX autor_proposicao_nome_slug (autor_proposicao_nome_slug(100))
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
